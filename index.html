@@ -1,0 +1,3749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+<title>Home Stock</title>
+
+<meta name="theme-color" content="#f7f3ee">
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    -webkit-tap-highlight-color:transparent;
+}
+
+:root{
+    --bg:#f7f3ee;
+    --card:#ffffff;
+    --text:#40372f;
+    --muted:#8d8177;
+    --primary:#b9825d;
+    --primary-dark:#986844;
+    --border:#eee6df;
+    --soft:#f4eee8;
+    --danger:#d96b67;
+    --danger-bg:#fff0ef;
+    --success:#6d9c71;
+    --success-bg:#edf7ed;
+    --warning:#c58a43;
+    --warning-bg:#fff5e3;
+    --shadow:0 5px 25px rgba(70,50,35,.07);
+}
+
+body.dark{
+    --bg:#171513;
+    --card:#24211e;
+    --text:#f5eee7;
+    --muted:#aaa098;
+    --primary:#d09a72;
+    --primary-dark:#b67c54;
+    --border:#3a342f;
+    --soft:#302b27;
+    --danger:#ef8c87;
+    --danger-bg:#3a2423;
+    --success:#8fbd92;
+    --success-bg:#253527;
+    --warning:#e0aa63;
+    --warning-bg:#3b3021;
+    --shadow:0 5px 25px rgba(0,0,0,.2);
+}
+
+body{
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+}
+
+button,
+input,
+select{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.app{
+    max-width:900px;
+    margin:0 auto;
+    padding:20px 18px 110px;
+}
+
+header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:24px;
+}
+
+.logo-area{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo{
+    width:55px;
+    height:55px;
+    border-radius:18px;
+    background:linear-gradient(135deg,#f0d4be,#c68e67);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:29px;
+    box-shadow:var(--shadow);
+}
+
+h1{
+    font-size:28px;
+    letter-spacing:-.5px;
+}
+
+.subtitle{
+    color:var(--muted);
+    font-size:13px;
+    margin-top:3px;
+}
+
+.header-actions{
+    display:flex;
+    gap:8px;
+}
+
+.icon-btn{
+    width:44px;
+    height:44px;
+    border:0;
+    border-radius:15px;
+    background:var(--card);
+    color:var(--text);
+    box-shadow:var(--shadow);
+    font-size:19px;
+}
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+    animation:appear .2s ease;
+}
+
+@keyframes appear{
+    from{
+        opacity:0;
+        transform:translateY(5px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.section-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:13px;
+}
+
+.section-title h2{
+    font-size:21px;
+}
+
+.section-title span{
+    color:var(--muted);
+    font-size:13px;
+}
+
+.dashboard-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+    margin-bottom:22px;
+}
+
+.stat-card{
+    background:var(--card);
+    border-radius:22px;
+    padding:18px;
+    box-shadow:var(--shadow);
+}
+
+.stat-icon{
+    font-size:27px;
+    margin-bottom:10px;
+}
+
+.stat-number{
+    font-size:28px;
+    font-weight:750;
+}
+
+.stat-label{
+    color:var(--muted);
+    font-size:13px;
+    margin-top:3px;
+}
+
+.quick-actions{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+    margin-bottom:24px;
+}
+
+.quick{
+    border:0;
+    border-radius:20px;
+    padding:17px;
+    text-align:left;
+    background:var(--card);
+    color:var(--text);
+    box-shadow:var(--shadow);
+}
+
+.quick-icon{
+    font-size:27px;
+    margin-bottom:7px;
+}
+
+.quick-title{
+    font-weight:700;
+}
+
+.quick-sub{
+    color:var(--muted);
+    font-size:12px;
+    margin-top:3px;
+}
+
+.card{
+    background:var(--card);
+    border-radius:22px;
+    padding:18px;
+    box-shadow:var(--shadow);
+    margin-bottom:16px;
+}
+
+.item-card{
+    background:var(--card);
+    border-radius:20px;
+    padding:16px;
+    box-shadow:var(--shadow);
+    margin-bottom:11px;
+}
+
+.item-row{
+    display:flex;
+    align-items:center;
+    gap:13px;
+}
+
+.item-icon{
+    width:50px;
+    height:50px;
+    border-radius:16px;
+    background:var(--soft);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:26px;
+    flex-shrink:0;
+}
+
+.item-main{
+    flex:1;
+    min-width:0;
+}
+
+.item-name{
+    font-weight:750;
+    font-size:16px;
+}
+
+.item-category{
+    color:var(--muted);
+    font-size:12px;
+    margin-top:3px;
+}
+
+.item-qty{
+    text-align:right;
+    font-weight:700;
+}
+
+.qty-number{
+    font-size:18px;
+}
+
+.qty-unit{
+    color:var(--muted);
+    font-size:11px;
+}
+
+.status{
+    display:inline-flex;
+    align-items:center;
+    gap:4px;
+    padding:5px 9px;
+    border-radius:20px;
+    font-size:11px;
+    font-weight:700;
+    margin-top:8px;
+}
+
+.status.ok{
+    color:var(--success);
+    background:var(--success-bg);
+}
+
+.status.low{
+    color:var(--warning);
+    background:var(--warning-bg);
+}
+
+.status.out{
+    color:var(--danger);
+    background:var(--danger-bg);
+}
+
+.item-info{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:12px;
+    padding-top:12px;
+    border-top:1px solid var(--border);
+}
+
+.info-chip{
+    background:var(--soft);
+    padding:7px 10px;
+    border-radius:10px;
+    font-size:11px;
+    color:var(--muted);
+}
+
+.item-buttons{
+    display:flex;
+    gap:7px;
+    margin-top:12px;
+}
+
+.small-button{
+    flex:1;
+    border:0;
+    border-radius:12px;
+    padding:9px;
+    background:var(--soft);
+    color:var(--text);
+    font-size:13px;
+    font-weight:600;
+}
+
+.small-button.primary{
+    background:var(--primary);
+    color:white;
+}
+
+.small-button.danger{
+    background:var(--danger-bg);
+    color:var(--danger);
+}
+
+.search-box{
+    position:relative;
+    margin-bottom:14px;
+}
+
+.search-box input{
+    padding-left:43px;
+}
+
+.search-icon{
+    position:absolute;
+    left:15px;
+    top:14px;
+    font-size:16px;
+}
+
+input,
+select{
+    width:100%;
+    border:1px solid transparent;
+    outline:none;
+    background:var(--soft);
+    color:var(--text);
+    border-radius:14px;
+    padding:13px 14px;
+    font-size:15px;
+}
+
+input:focus,
+select:focus{
+    border-color:var(--primary);
+}
+
+label{
+    display:block;
+    font-size:12px;
+    color:var(--muted);
+    margin:12px 0 6px;
+    font-weight:600;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.full{
+    grid-column:1 / -1;
+}
+
+.primary-button{
+    width:100%;
+    border:0;
+    background:var(--primary);
+    color:white;
+    border-radius:15px;
+    padding:14px;
+    font-weight:700;
+    margin-top:16px;
+}
+
+.primary-button:active{
+    background:var(--primary-dark);
+}
+
+.cancel-button{
+    width:100%;
+    border:0;
+    background:var(--soft);
+    color:var(--text);
+    border-radius:15px;
+    padding:14px;
+    font-weight:700;
+    margin-top:9px;
+}
+
+.category-scroll{
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    padding-bottom:4px;
+    margin-bottom:15px;
+}
+
+.category-scroll::-webkit-scrollbar{
+    display:none;
+}
+
+.category-btn{
+    white-space:nowrap;
+    border:0;
+    background:var(--card);
+    color:var(--text);
+    border-radius:20px;
+    padding:9px 13px;
+    box-shadow:var(--shadow);
+    font-size:12px;
+}
+
+.category-btn.active{
+    background:var(--primary);
+    color:white;
+}
+
+.empty{
+    text-align:center;
+    padding:40px 20px;
+    color:var(--muted);
+}
+
+.empty-icon{
+    font-size:45px;
+    margin-bottom:10px;
+}
+
+.empty-title{
+    font-weight:700;
+    color:var(--text);
+    margin-bottom:5px;
+}
+
+.shopping-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:14px 0;
+    border-bottom:1px solid var(--border);
+}
+
+.shopping-row:last-child{
+    border-bottom:0;
+}
+
+.check{
+    width:25px;
+    height:25px;
+    border-radius:8px;
+    border:2px solid var(--primary);
+    background:transparent;
+    flex-shrink:0;
+}
+
+.check.done{
+    background:var(--primary);
+    color:white;
+}
+
+.shopping-name{
+    flex:1;
+}
+
+.shopping-name strong{
+    display:block;
+}
+
+.shopping-name small{
+    color:var(--muted);
+}
+
+.calendar-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+.calendar-head button{
+    border:0;
+    background:var(--soft);
+    color:var(--text);
+    border-radius:12px;
+    width:40px;
+    height:40px;
+}
+
+.calendar-title{
+    font-weight:750;
+    font-size:18px;
+}
+
+.calendar-week{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    text-align:center;
+    color:var(--muted);
+    font-size:11px;
+    font-weight:700;
+    margin-bottom:7px;
+}
+
+.calendar-grid{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:5px;
+}
+
+.calendar-day{
+    min-height:58px;
+    border-radius:13px;
+    background:var(--soft);
+    padding:7px 3px;
+    text-align:center;
+    cursor:pointer;
+}
+
+.calendar-day.empty-day{
+    background:transparent;
+    cursor:default;
+}
+
+.calendar-day.today{
+    outline:2px solid var(--primary);
+}
+
+.calendar-number{
+    font-weight:700;
+    font-size:13px;
+}
+
+.calendar-icons{
+    font-size:13px;
+    margin-top:6px;
+    min-height:16px;
+}
+
+.calendar-dots{
+    display:flex;
+    justify-content:center;
+    gap:3px;
+    margin-top:4px;
+}
+
+.dot{
+    width:5px;
+    height:5px;
+    border-radius:50%;
+    background:var(--primary);
+}
+
+.month-nav{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.timeline-date{
+    font-weight:750;
+    margin:17px 0 8px;
+    font-size:14px;
+}
+
+.timeline-entry{
+    background:var(--card);
+    border-radius:16px;
+    padding:13px;
+    box-shadow:var(--shadow);
+    margin-bottom:8px;
+    display:flex;
+    gap:10px;
+    align-items:center;
+}
+
+.timeline-entry-icon{
+    font-size:23px;
+}
+
+.timeline-entry-main{
+    flex:1;
+}
+
+.timeline-entry-main strong{
+    font-size:14px;
+}
+
+.timeline-entry-main small{
+    display:block;
+    color:var(--muted);
+    margin-top:3px;
+}
+
+.total-box{
+    text-align:center;
+    padding:25px 10px;
+}
+
+.total-label{
+    color:var(--muted);
+    font-size:13px;
+}
+
+.total-value{
+    font-size:43px;
+    font-weight:800;
+    margin-top:5px;
+}
+
+.breakdown-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:13px 0;
+    border-bottom:1px solid var(--border);
+}
+
+.breakdown-left{
+    display:flex;
+    align-items:center;
+    gap:9px;
+}
+
+.breakdown-dot{
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:var(--primary);
+}
+
+.month-summary{
+    display:flex;
+    justify-content:space-between;
+    padding:14px 0;
+    border-bottom:1px solid var(--border);
+}
+
+.month-summary:last-child{
+    border-bottom:0;
+}
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.42);
+    display:none;
+    align-items:flex-end;
+    justify-content:center;
+    z-index:1000;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-sheet{
+    width:100%;
+    max-width:650px;
+    max-height:92vh;
+    overflow-y:auto;
+    background:var(--card);
+    border-radius:28px 28px 0 0;
+    padding:22px 18px 30px;
+    animation:slideUp .25s ease;
+}
+
+@keyframes slideUp{
+    from{
+        transform:translateY(100%);
+    }
+    to{
+        transform:translateY(0);
+    }
+}
+
+.modal-handle{
+    width:42px;
+    height:5px;
+    border-radius:5px;
+    background:var(--border);
+    margin:0 auto 18px;
+}
+
+.modal-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:15px;
+}
+
+.modal-header h2{
+    font-size:21px;
+}
+
+.close{
+    border:0;
+    background:var(--soft);
+    color:var(--text);
+    width:38px;
+    height:38px;
+    border-radius:12px;
+}
+
+.bottom-nav{
+    position:fixed;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:100%;
+    max-width:900px;
+    background:var(--card);
+    border-top:1px solid var(--border);
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    padding:9px 8px calc(9px + env(safe-area-inset-bottom));
+    z-index:900;
+}
+
+.nav-btn{
+    border:0;
+    background:transparent;
+    color:var(--muted);
+    padding:7px 3px;
+    font-size:11px;
+}
+
+.nav-icon{
+    font-size:20px;
+    display:block;
+    margin-bottom:3px;
+}
+
+.nav-btn.active{
+    color:var(--primary);
+    font-weight:750;
+}
+
+.toast{
+    position:fixed;
+    left:50%;
+    bottom:90px;
+    transform:translateX(-50%) translateY(20px);
+    background:#302a25;
+    color:white;
+    padding:12px 18px;
+    border-radius:14px;
+    font-size:13px;
+    opacity:0;
+    pointer-events:none;
+    transition:.25s;
+    z-index:2000;
+    white-space:nowrap;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+}
+
+@media(max-width:500px){
+
+    .app{
+        padding-left:14px;
+        padding-right:14px;
+    }
+
+    h1{
+        font-size:25px;
+    }
+
+    .dashboard-grid{
+        gap:9px;
+    }
+
+    .stat-card{
+        padding:14px;
+    }
+
+    .stat-number{
+        font-size:24px;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .full{
+        grid-column:auto;
+    }
+
+    .calendar-day{
+        min-height:54px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+
+<div class="logo-area">
+
+<div class="logo">
+🏠
+</div>
+
+<div>
+<h1>Home Stock</h1>
+<div class="subtitle">Know what you have. Buy only what you need.</div>
+</div>
+
+</div>
+
+<div class="header-actions">
+
+<button
+class="icon-btn"
+onclick="toggleDarkMode()">
+🌙
+</button>
+
+<button
+class="icon-btn"
+onclick="openSettings()">
+⚙️
+</button>
+
+</div>
+
+</header>
+
+
+<!-- HOME -->
+
+<section
+id="home"
+class="page active">
+
+<div class="dashboard-grid">
+
+<div class="stat-card">
+
+<div class="stat-icon">📦</div>
+
+<div
+class="stat-number"
+id="homeTotal">
+0
+</div>
+
+<div class="stat-label">
+Total Items
+</div>
+
+</div>
+
+<div class="stat-card">
+
+<div class="stat-icon">⚠️</div>
+
+<div
+class="stat-number"
+id="homeLow">
+0
+</div>
+
+<div class="stat-label">
+Need Restock
+</div>
+
+</div>
+
+<div class="stat-card">
+
+<div class="stat-icon">🛒</div>
+
+<div
+class="stat-number"
+id="homeShopping">
+0
+</div>
+
+<div class="stat-label">
+Shopping List
+</div>
+
+</div>
+
+<div class="stat-card">
+
+<div class="stat-icon">💰</div>
+
+<div
+class="stat-number"
+id="homeValue">
+$0
+</div>
+
+<div class="stat-label">
+Estimated Value
+</div>
+
+</div>
+
+</div>
+
+
+<div class="section-title">
+
+<h2>Quick Actions</h2>
+
+</div>
+
+<div class="quick-actions">
+
+<button
+class="quick"
+onclick="openAddItem()">
+
+<div class="quick-icon">
+➕
+</div>
+
+<div class="quick-title">
+Add Item
+</div>
+
+<div class="quick-sub">
+Add something you keep at home
+</div>
+
+</button>
+
+<button
+class="quick"
+onclick="showPage('shopping')">
+
+<div class="quick-icon">
+🛒
+</div>
+
+<div class="quick-title">
+Shopping List
+</div>
+
+<div class="quick-sub">
+See what needs buying
+</div>
+
+</button>
+
+</div>
+
+
+<div class="section-title">
+
+<h2>⚠️ Need Restock</h2>
+
+<span
+onclick="showPage('inventory')"
+style="cursor:pointer">
+See All →
+</span>
+
+</div>
+
+<div id="homeLowList"></div>
+
+</section>
+
+
+<!-- INVENTORY -->
+
+<section
+id="inventory"
+class="page">
+
+<div class="section-title">
+
+<h2>📦 My Inventory</h2>
+
+<button
+class="small-button primary"
+style="flex:0;padding:9px 13px"
+onclick="openAddItem()">
++ Add
+</button>
+
+</div>
+
+<div class="search-box">
+
+<span class="search-icon">🔍</span>
+
+<input
+id="searchInput"
+type="search"
+placeholder="Search items..."
+oninput="renderInventory()">
+
+</div>
+
+
+<div
+class="category-scroll"
+id="categoryButtons">
+</div>
+
+
+<div id="inventoryList"></div>
+
+</section>
+
+
+<!-- SHOPPING -->
+
+<section
+id="shopping"
+class="page">
+
+<div class="section-title">
+
+<h2>🛒 Shopping List</h2>
+
+<span id="shoppingCount">
+0 items
+</span>
+
+</div>
+
+<div class="card">
+
+<div id="shoppingList"></div>
+
+<button
+class="primary-button"
+onclick="openAddShopping()">
+＋ Add to Shopping List
+</button>
+
+</div>
+
+</section>
+
+
+<!-- CALENDAR -->
+
+<section
+id="calendar"
+class="page">
+
+<div class="section-title">
+
+<h2>📅 Purchase History</h2>
+
+</div>
+
+<div class="card">
+
+<div class="calendar-head">
+
+<button onclick="changeCalendarMonth(-1)">
+‹
+</button>
+
+<div
+class="calendar-title"
+id="calendarTitle">
+August 2026
+</div>
+
+<button onclick="changeCalendarMonth(1)">
+›
+</button>
+
+</div>
+
+<div class="calendar-week">
+
+<div>Sun</div>
+<div>Mon</div>
+<div>Tue</div>
+<div>Wed</div>
+<div>Thu</div>
+<div>Fri</div>
+<div>Sat</div>
+
+</div>
+
+<div
+class="calendar-grid"
+id="calendarGrid">
+</div>
+
+</div>
+
+
+<div class="section-title">
+
+<h2>🕒 Timeline</h2>
+
+</div>
+
+<div id="timeline"></div>
+
+</section>
+
+
+<!-- STATS -->
+
+<section
+id="stats"
+class="page">
+
+<div class="section-title">
+
+<h2>📊 Statistics</h2>
+
+</div>
+
+<div class="card">
+
+<div class="total-box">
+
+<div class="total-label">
+Estimated Current Stock Value
+</div>
+
+<div
+class="total-value"
+id="statsValue">
+$0
+</div>
+
+</div>
+
+<div
+class="breakdown-row">
+
+<div class="breakdown-left">
+<div class="breakdown-dot"></div>
+Kitchen
+</div>
+
+<strong id="kitchenValue">$0</strong>
+
+</div>
+
+<div
+class="breakdown-row">
+
+<div class="breakdown-left">
+<div class="breakdown-dot"></div>
+Bathroom
+</div>
+
+<strong id="bathroomValue">$0</strong>
+
+</div>
+
+<div
+class="breakdown-row">
+
+<div class="breakdown-left">
+<div class="breakdown-dot"></div>
+Cleaning
+</div>
+
+<strong id="cleaningValue">$0</strong>
+
+</div>
+
+<div
+class="breakdown-row">
+
+<div class="breakdown-left">
+<div class="breakdown-dot"></div>
+Other
+</div>
+
+<strong id="otherValue">$0</strong>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="section-title">
+
+<h2>📅 Purchase Spending</h2>
+
+<span>By Month</span>
+
+</div>
+
+<div id="monthlyStats"></div>
+
+</div>
+
+</section>
+
+
+<!-- BOTTOM NAV -->
+
+<nav class="bottom-nav">
+
+<button
+class="nav-btn active"
+data-page="home"
+onclick="showPage('home')">
+
+<span class="nav-icon">🏠</span>
+Home
+
+</button>
+
+<button
+class="nav-btn"
+data-page="inventory"
+onclick="showPage('inventory')">
+
+<span class="nav-icon">📦</span>
+Inventory
+
+</button>
+
+<button
+class="nav-btn"
+data-page="shopping"
+onclick="showPage('shopping')">
+
+<span class="nav-icon">🛒</span>
+Shopping
+
+</button>
+
+<button
+class="nav-btn"
+data-page="stats"
+onclick="showPage('stats')">
+
+<span class="nav-icon">📊</span>
+Stats
+
+</button>
+
+</nav>
+
+</div>
+
+
+<!-- MODAL -->
+
+<div
+class="modal"
+id="modal">
+
+<div class="modal-sheet">
+
+<div class="modal-handle"></div>
+
+<div id="modalContent"></div>
+
+</div>
+
+</div>
+
+
+<div
+class="toast"
+id="toast">
+Saved
+</div>
+
+
+<script>
+
+/* =========================================
+   HOME STOCK
+   DATA
+========================================= */
+
+const STORAGE_KEY = "homeStockUltimateData";
+
+let data =
+JSON.parse(localStorage.getItem(STORAGE_KEY)) || {
+
+items:[],
+shopping:[],
+purchases:[],
+settings:{
+dark:false
+}
+
+};
+
+
+let selectedCategory = "All";
+
+let calendarDate = new Date();
+
+
+/* =========================================
+   SAVE
+========================================= */
+
+function saveData(){
+
+localStorage.setItem(
+STORAGE_KEY,
+JSON.stringify(data)
+);
+
+}
+
+
+/* =========================================
+   TOAST
+========================================= */
+
+function toast(message){
+
+const el =
+document.getElementById("toast");
+
+el.textContent = message;
+
+el.classList.add("show");
+
+setTimeout(()=>{
+el.classList.remove("show");
+},1800);
+
+}
+
+
+/* =========================================
+   PAGE
+========================================= */
+
+function showPage(page){
+
+document
+.querySelectorAll(".page")
+.forEach(p=>{
+p.classList.remove("active");
+});
+
+document
+.getElementById(page)
+.classList.add("active");
+
+
+document
+.querySelectorAll(".nav-btn")
+.forEach(btn=>{
+btn.classList.remove("active");
+
+if(btn.dataset.page===page){
+btn.classList.add("active");
+}
+
+});
+
+
+renderAll();
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+
+/* =========================================
+   MODAL
+========================================= */
+
+function openModal(html){
+
+document
+.getElementById("modalContent")
+.innerHTML=html;
+
+document
+.getElementById("modal")
+.classList.add("show");
+
+}
+
+
+function closeModal(){
+
+document
+.getElementById("modal")
+.classList.remove("show");
+
+}
+
+
+document
+.getElementById("modal")
+.addEventListener("click",function(e){
+
+if(e.target===this){
+closeModal();
+}
+
+});
+
+
+/* =========================================
+   ADD ITEM
+========================================= */
+
+function openAddItem(){
+
+openModal(`
+
+<div class="modal-header">
+
+<h2>➕ Add Home Item</h2>
+
+<button
+class="close"
+onclick="closeModal()">
+✕
+</button>
+
+</div>
+
+
+<label>Item Name</label>
+
+<input
+id="formName"
+placeholder="e.g. Toilet Paper">
+
+
+<label>Icon</label>
+
+<input
+id="formIcon"
+placeholder="e.g. 🧻"
+value="📦">
+
+
+<div class="form-grid">
+
+<div>
+
+<label>Category</label>
+
+<select id="formCategory">
+
+<option>Kitchen</option>
+<option>Bathroom</option>
+<option>Cleaning</option>
+<option>Pantry</option>
+<option>Personal Care</option>
+<option>Pet</option>
+<option>Other</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label>Unit</label>
+
+<select id="formUnit">
+
+<option>pcs</option>
+<option>rolls</option>
+<option>cans</option>
+<option>bottles</option>
+<option>boxes</option>
+<option>bags</option>
+<option>packs</option>
+<option>kg</option>
+<option>L</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+<div class="form-grid">
+
+<div>
+
+<label>Current Quantity</label>
+
+<input
+id="formQuantity"
+type="number"
+min="0"
+value="1">
+
+</div>
+
+
+<div>
+
+<label>Minimum Quantity</label>
+
+<input
+id="formMinimum"
+type="number"
+min="0"
+value="1">
+
+</div>
+
+</div>
+
+
+<div class="form-grid">
+
+<div>
+
+<label>Price Per Unit</label>
+
+<input
+id="formPrice"
+type="number"
+min="0"
+step="0.01"
+placeholder="0.00">
+
+</div>
+
+
+<div>
+
+<label>Preferred Store</label>
+
+<input
+id="formStore"
+placeholder="e.g. Costco">
+
+</div>
+
+</div>
+
+
+<label>Last Purchased</label>
+
+<input
+id="formLastBought"
+type="date"
+value="${today()}">
+
+
+<label>Notes</label>
+
+<input
+id="formNotes"
+placeholder="Optional">
+
+
+<button
+class="primary-button"
+onclick="saveNewItem()">
+Save Item
+</button>
+
+
+<button
+class="cancel-button"
+onclick="closeModal()">
+Cancel
+</button>
+
+`);
+
+}
+
+
+/* =========================================
+   SAVE ITEM
+========================================= */
+
+function saveNewItem(){
+
+const name =
+document.getElementById("formName").value.trim();
+
+if(!name){
+
+alert("Please enter an item name.");
+
+return;
+
+}
+
+
+const item={
+
+id:Date.now().toString(),
+
+name:name,
+
+icon:
+document.getElementById("formIcon").value.trim() || "📦",
+
+category:
+document.getElementById("formCategory").value,
+
+unit:
+document.getElementById("formUnit").value,
+
+quantity:
+Number(document.getElementById("formQuantity").value)||0,
+
+minimum:
+Number(document.getElementById("formMinimum").value)||0,
+
+price:
+Number(document.getElementById("formPrice").value)||0,
+
+store:
+document.getElementById("formStore").value.trim(),
+
+lastBought:
+document.getElementById("formLastBought").value,
+
+notes:
+document.getElementById("formNotes").value.trim(),
+
+createdAt:
+today()
+
+};
+
+
+data.items.push(item);
+
+saveData();
+
+closeModal();
+
+toast("Item added ✓");
+
+renderAll();
+
+}
+
+
+/* =========================================
+   EDIT ITEM
+========================================= */
+
+function editItem(id){
+
+const item =
+data.items.find(i=>i.id===id);
+
+if(!item) return;
+
+
+openModal(`
+
+<div class="modal-header">
+
+<h2>✏️ Edit Item</h2>
+
+<button
+class="close"
+onclick="closeModal()">
+✕
+</button>
+
+</div>
+
+
+<label>Item Name</label>
+
+<input
+id="editName"
+value="${escapeHtml(item.name)}">
+
+
+<label>Icon</label>
+
+<input
+id="editIcon"
+value="${escapeHtml(item.icon)}">
+
+
+<div class="form-grid">
+
+<div>
+
+<label>Category</label>
+
+<select id="editCategory">
+
+${categoryOptions(item.category)}
+
+</select>
+
+</div>
+
+
+<div>
+
+<label>Unit</label>
+
+<select id="editUnit">
+
+${unitOptions(item.unit)}
+
+</select>
+
+</div>
+
+</div>
+
+
+<div class="form-grid">
+
+<div>
+
+<label>Current Quantity</label>
+
+<input
+id="editQuantity"
+type="number"
+min="0"
+value="${item.quantity}">
+
+</div>
+
+
+<div>
+
+<label>Minimum Quantity</label>
+
+<input
+id="editMinimum"
+type="number"
+min="0"
+value="${item.minimum}">
+
+</div>
+
+</div>
+
+
+<div class="form-grid">
+
+<div>
+
+<label>Price Per Unit</label>
+
+<input
+id="editPrice"
+type="number"
+min="0"
+step="0.01"
+value="${item.price}">
+
+</div>
+
+
+<div>
+
+<label>Preferred Store</label>
+
+<input
+id="editStore"
+value="${escapeHtml(item.store || "")}">
+
+</div>
+
+</div>
+
+
+<label>Last Purchased</label>
+
+<input
+id="editLastBought"
+type="date"
+value="${item.lastBought || ""}">
+
+
+<label>Notes</label>
+
+<input
+id="editNotes"
+value="${escapeHtml(item.notes || "")}">
+
+
+<button
+class="primary-button"
+onclick="saveEditItem('${item.id}')">
+Save Changes
+</button>
+
+
+<button
+class="cancel-button"
+onclick="closeModal()">
+Cancel
+</button>
+
+`);
+
+}
+
+
+/* =========================================
+   SAVE EDIT
+========================================= */
+
+function saveEditItem(id){
+
+const item =
+data.items.find(i=>i.id===id);
+
+if(!item) return;
+
+
+const name =
+document.getElementById("editName").value.trim();
+
+if(!name){
+
+alert("Please enter an item name.");
+
+return;
+
+}
+
+
+item.name=name;
+
+item.icon=
+document.getElementById("editIcon").value.trim() || "📦";
+
+item.category=
+document.getElementById("editCategory").value;
+
+item.unit=
+document.getElementById("editUnit").value;
+
+item.quantity=
+Number(document.getElementById("editQuantity").value)||0;
+
+item.minimum=
+Number(document.getElementById("editMinimum").value)||0;
+
+item.price=
+Number(document.getElementById("editPrice").value)||0;
+
+item.store=
+document.getElementById("editStore").value.trim();
+
+item.lastBought=
+document.getElementById("editLastBought").value;
+
+item.notes=
+document.getElementById("editNotes").value.trim();
+
+
+saveData();
+
+closeModal();
+
+toast("Updated ✓");
+
+renderAll();
+
+}
+
+
+/* =========================================
+   DELETE
+========================================= */
+
+function deleteItem(id){
+
+const item =
+data.items.find(i=>i.id===id);
+
+if(!item) return;
+
+
+if(
+!confirm(
+`Delete "${item.name}"?`
+)
+){
+return;
+}
+
+
+data.items =
+data.items.filter(
+i=>i.id!==id
+);
+
+
+saveData();
+
+toast("Deleted");
+
+renderAll();
+
+}
+
+
+/* =========================================
+   QUANTITY
+========================================= */
+
+function changeQuantity(id,amount){
+
+const item =
+data.items.find(i=>i.id===id);
+
+if(!item) return;
+
+
+item.quantity =
+Math.max(
+0,
+item.quantity + amount
+);
+
+
+saveData();
+
+renderAll();
+
+}
+
+
+/* =========================================
+   STATUS
+========================================= */
+
+function getStatus(item){
+
+if(item.quantity<=0){
+
+return {
+class:"out",
+text:"🔴 Out of Stock"
+};
+
+}
+
+if(item.quantity<=item.minimum){
+
+return {
+class:"low",
+text:"⚠️ Need Restock"
+};
+
+}
+
+return {
+class:"ok",
+text:"🟢 In Stock"
+};
+
+}
+
+
+/* =========================================
+   INVENTORY
+========================================= */
+
+function renderInventory(){
+
+const list =
+document.getElementById("inventoryList");
+
+if(!list) return;
+
+
+const search =
+(
+document.getElementById("searchInput")?.value || ""
+)
+.toLowerCase()
+.trim();
+
+
+renderCategories();
+
+
+let items =
+[...data.items];
+
+
+if(selectedCategory!=="All"){
+
+items =
+items.filter(
+i=>i.category===selectedCategory
+);
+
+}
+
+
+if(search){
+
+items =
+items.filter(i=>
+i.name.toLowerCase().includes(search) ||
+i.category.toLowerCase().includes(search) ||
+(i.store||"").toLowerCase().includes(search)
+);
+
+}
+
+
+items.sort((a,b)=>{
+
+const sa =
+getStatus(a);
+
+const sb =
+getStatus(b);
+
+if(sa.class==="out" && sb.class!=="out")
+return -1;
+
+if(sa.class!=="out" && sb.class==="out")
+return 1;
+
+if(sa.class==="low" && sb.class==="ok")
+return -1;
+
+if(sa.class==="ok" && sb.class==="low")
+return 1;
+
+return a.name.localeCompare(b.name);
+
+});
+
+
+if(items.length===0){
+
+list.innerHTML=emptyState(
+"📦",
+"No items found",
+"Add your first home item to start tracking your stock."
+);
+
+return;
+
+}
+
+
+list.innerHTML =
+items.map(item=>itemHTML(item)).join("");
+
+}
+
+
+/* =========================================
+   ITEM HTML
+========================================= */
+
+function itemHTML(item){
+
+const status =
+getStatus(item);
+
+
+return `
+
+<div class="item-card">
+
+<div class="item-row">
+
+<div class="item-icon">
+${escapeHtml(item.icon)}
+</div>
+
+
+<div class="item-main">
+
+<div class="item-name">
+${escapeHtml(item.name)}
+</div>
+
+<div class="item-category">
+${escapeHtml(item.category)}
+</div>
+
+<div class="status ${status.class}">
+${status.text}
+</div>
+
+</div>
+
+
+<div class="item-qty">
+
+<div class="qty-number">
+${item.quantity}
+</div>
+
+<div class="qty-unit">
+${escapeHtml(item.unit)}
+</div>
+
+</div>
+
+</div>
+
+
+<div class="item-info">
+
+<div class="info-chip">
+💰 $${money(item.price)} / ${escapeHtml(item.unit)}
+</div>
+
+<div class="info-chip">
+🏪 ${escapeHtml(item.store || "No store")}
+</div>
+
+<div class="info-chip">
+📅 ${formatDate(item.lastBought)}
+</div>
+
+</div>
+
+
+<div class="item-buttons">
+
+<button
+class="small-button"
+onclick="changeQuantity('${item.id}',-1)">
+− 1
+</button>
+
+<button
+class="small-button primary"
+onclick="changeQuantity('${item.id}',1)">
++ 1
+</button>
+
+<button
+class="small-button"
+onclick="editItem('${item.id}')">
+✏️ Edit
+</button>
+
+<button
+class="small-button danger"
+onclick="deleteItem('${item.id}')">
+🗑
+</button>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+
+/* =========================================
+   CATEGORIES
+========================================= */
+
+function renderCategories(){
+
+const container =
+document.getElementById("categoryButtons");
+
+if(!container) return;
+
+
+const categories=[
+"All",
+"Kitchen",
+"Bathroom",
+"Cleaning",
+"Pantry",
+"Personal Care",
+"Pet",
+"Other"
+];
+
+
+container.innerHTML =
+categories.map(category=>`
+
+<button
+class="category-btn ${selectedCategory===category?"active":""}"
+onclick="selectCategory('${category}')">
+
+${category}
+
+</button>
+
+`).join("");
+
+}
+
+
+function selectCategory(category){
+
+selectedCategory=category;
+
+renderInventory();
+
+}
+
+
+/* =========================================
+   HOME
+========================================= */
+
+function renderHome(){
+
+const total =
+data.items.length;
+
+const low =
+data.items.filter(
+i=>i.quantity<=i.minimum
+).length;
+
+const shopping =
+data.shopping.filter(
+i=>!i.done
+).length;
+
+const value =
+data.items.reduce(
+(sum,i)=>sum+(i.quantity*i.price),
+0
+);
+
+
+document.getElementById("homeTotal")
+.textContent=total;
+
+document.getElementById("homeLow")
+.textContent=low;
+
+document.getElementById("homeShopping")
+.textContent=shopping;
+
+document.getElementById("homeValue")
+.textContent="$"+money(value);
+
+
+const lowItems =
+data.items
+.filter(i=>i.quantity<=i.minimum)
+.sort((a,b)=>a.quantity-b.quantity)
+.slice(0,5);
+
+
+const container =
+document.getElementById("homeLowList");
+
+
+if(lowItems.length===0){
+
+container.innerHTML=emptyState(
+"🎉",
+"Everything looks good!",
+"No items currently need restocking."
+);
+
+return;
+
+}
+
+
+container.innerHTML =
+lowItems
+.map(item=>itemHTML(item))
+.join("");
+
+}
+
+
+/* =========================================
+   SHOPPING LIST
+========================================= */
+
+function renderShopping(){
+
+const list =
+document.getElementById("shoppingList");
+
+const active =
+data.shopping.filter(
+i=>!i.done
+);
+
+document.getElementById("shoppingCount")
+.textContent =
+active.length + " item" +
+(active.length===1?"":"s");
+
+
+if(active.length===0){
+
+list.innerHTML=emptyState(
+"🛒",
+"Shopping list is empty",
+"Items that need restocking can be added here."
+);
+
+return;
+
+}
+
+
+list.innerHTML =
+active.map(item=>`
+
+<div class="shopping-row">
+
+<button
+class="check"
+onclick="completeShopping('${item.id}')">
+</button>
+
+<div class="shopping-name">
+
+<strong>
+${escapeHtml(item.name)}
+</strong>
+
+<small>
+${escapeHtml(item.quantity || "")}
+${item.store ? " • "+escapeHtml(item.store):""}
+</small>
+
+</div>
+
+<button
+class="small-button danger"
+style="flex:0;padding:8px 11px"
+onclick="deleteShopping('${item.id}')">
+🗑
+</button>
+
+</div>
+
+`).join("");
+
+}
+
+
+/* =========================================
+   ADD SHOPPING
+========================================= */
+
+function openAddShopping(){
+
+openModal(`
+
+<div class="modal-header">
+
+<h2>🛒 Add Shopping Item</h2>
+
+<button
+class="close"
+onclick="closeModal()">
+✕
+</button>
+
+</div>
+
+
+<label>Item</label>
+
+<input
+id="shoppingName"
+placeholder="e.g. Toilet Paper">
+
+
+<label>Quantity / Note</label>
+
+<input
+id="shoppingQuantity"
+placeholder="e.g. 2 packs">
+
+
+<label>Preferred Store</label>
+
+<input
+id="shoppingStore"
+placeholder="e.g. Costco">
+
+
+<button
+class="primary-button"
+onclick="saveShopping()">
+Add to List
+</button>
+
+`);
+
+}
+
+
+function saveShopping(){
+
+const name =
+document
+.getElementById("shoppingName")
+.value.trim();
+
+if(!name){
+
+alert("Please enter an item.");
+
+return;
+
+}
+
+
+data.shopping.push({
+
+id:Date.now().toString(),
+
+name:name,
+
+quantity:
+document
+.getElementById("shoppingQuantity")
+.value.trim(),
+
+store:
+document
+.getElementById("shoppingStore")
+.value.trim(),
+
+done:false,
+
+createdAt:today()
+
+});
+
+
+saveData();
+
+closeModal();
+
+toast("Added to shopping list ✓");
+
+renderAll();
+
+}
+
+
+/* =========================================
+   COMPLETE SHOPPING
+========================================= */
+
+function completeShopping(id){
+
+const shopping =
+data.shopping.find(
+i=>i.id===id
+);
+
+if(!shopping) return;
+
+
+const existing =
+data.items.find(
+i=>
+i.name.toLowerCase()===
+shopping.name.toLowerCase()
+);
+
+
+if(existing){
+
+openModal(`
+
+<div class="modal-header">
+
+<h2>🛒 Bought!</h2>
+
+<button
+class="close"
+onclick="closeModal()">
+✕
+</button>
+
+</div>
+
+<p style="color:var(--muted);margin-bottom:15px">
+
+${escapeHtml(shopping.name)}
+is already in your inventory.
+
+</p>
+
+<label>How many did you buy?</label>
+
+<input
+id="boughtQuantity"
+type="number"
+min="1"
+value="1">
+
+
+<label>Price per unit</label>
+
+<input
+id="boughtPrice"
+type="number"
+min="0"
+step="0.01"
+value="${existing.price || 0}">
+
+
+<button
+class="primary-button"
+onclick="finishPurchase('${id}','${existing.id}')">
+Add to Inventory
+</button>
+
+`);
+
+return;
+
+}
+
+
+openModal(`
+
+<div class="modal-header">
+
+<h2>🛒 Add New Item</h2>
+
+<button
+class="close"
+onclick="closeModal()">
+✕
+</button>
+
+</div>
+
+<label>How many did you buy?</label>
+
+<input
+id="boughtQuantity"
+type="number"
+min="1"
+value="1">
+
+
+<label>Price per unit</label>
+
+<input
+id="boughtPrice"
+type="number"
+min="0"
+step="0.01"
+value="0">
+
+
+<label>Category</label>
+
+<select id="boughtCategory">
+
+<option>Kitchen</option>
+<option>Bathroom</option>
+<option>Cleaning</option>
+<option>Pantry</option>
+<option>Personal Care</option>
+<option>Pet</option>
+<option>Other</option>
+
+</select>
+
+
+<button
+class="primary-button"
+onclick="finishNewPurchase('${id}')">
+Add to Inventory
+</button>
+
+`);
+
+}
+
+
+/* =========================================
+   FINISH EXISTING PURCHASE
+========================================= */
+
+function finishPurchase(shoppingId,itemId){
+
+const shopping =
+data.shopping.find(
+i=>i.id===shoppingId
+);
+
+const item =
+data.items.find(
+i=>i.id===itemId
+);
+
+if(!shopping || !item) return;
+
+
+const qty =
+Number(
+document.getElementById("boughtQuantity").value
+)||1;
+
+const price =
+Number(
+document.getElementById("boughtPrice").value
+)||0;
+
+
+item.quantity += qty;
+
+item.price = price;
+
+item.lastBought = today();
+
+
+data.purchases.push({
+
+id:Date.now().toString(),
+
+itemId:item.id,
+
+itemName:item.name,
+
+quantity:qty,
+
+price:price,
+
+date:today(),
+
+store:item.store || shopping.store || ""
+
+});
+
+
+data.shopping =
+data.shopping.filter(
+i=>i.id!==shoppingId
+);
+
+
+saveData();
+
+closeModal();
+
+toast("Inventory updated ✓");
+
+renderAll();
+
+}
+
+
+/* =========================================
+   FINISH NEW PURCHASE
+========================================= */
+
+function finishNewPurchase(shoppingId){
+
+const shopping =
+data.shopping.find(
+i=>i.id===shoppingId
+);
+
+if(!shopping) return;
+
+
+const qty =
+Number(
+document.getElementById("boughtQuantity").value
+)||1;
+
+const price =
+Number(
+document.getElementById("boughtPrice").value
+)||0;
+
+const category =
+document.getElementById("boughtCategory").value;
+
+
+const item={
+
+id:Date.now().toString(),
+
+name:shopping.name,
+
+icon:"📦",
+
+category:category,
+
+unit:"pcs",
+
+quantity:qty,
+
+minimum:1,
+
+price:price,
+
+store:shopping.store || "",
+
+lastBought:today(),
+
+notes:"",
+
+createdAt:today()
+
+};
+
+
+data.items.push(item);
+
+
+data.purchases.push({
+
+id:Date.now().toString()+"p",
+
+itemId:item.id,
+
+itemName:item.name,
+
+quantity:qty,
+
+price:price,
+
+date:today(),
+
+store:item.store
+
+});
+
+
+data.shopping =
+data.shopping.filter(
+i=>i.id!==shoppingId
+);
+
+
+saveData();
+
+closeModal();
+
+toast("New item added ✓");
+
+renderAll();
+
+}
+
+
+/* =========================================
+   DELETE SHOPPING
+========================================= */
+
+function deleteShopping(id){
+
+data.shopping =
+data.shopping.filter(
+i=>i.id!==id
+);
+
+saveData();
+
+renderAll();
+
+}
+
+
+/* =========================================
+   CALENDAR
+========================================= */
+
+function changeCalendarMonth(direction){
+
+calendarDate.setMonth(
+calendarDate.getMonth()+direction
+);
+
+renderCalendar();
+
+}
+
+
+function renderCalendar(){
+
+const grid =
+document.getElementById("calendarGrid");
+
+if(!grid) return;
+
+
+const year =
+calendarDate.getFullYear();
+
+const month =
+calendarDate.getMonth();
+
+
+const monthNames=[
+"January","February","March",
+"April","May","June",
+"July","August","September",
+"October","November","December"
+];
+
+
+document.getElementById("calendarTitle")
+.textContent =
+monthNames[month]+" "+year;
+
+
+const first =
+new Date(year,month,1)
+.getDay();
+
+const days =
+new Date(year,month+1,0)
+.getDate();
+
+
+let html="";
+
+
+for(let i=0;i<first;i++){
+
+html+=`
+<div class="calendar-day empty-day"></div>
+`;
+
+}
+
+
+for(let day=1;day<=days;day++){
+
+const date =
+formatISO(
+new Date(year,month,day)
+);
+
+
+const purchases =
+data.purchases.filter(
+p=>p.date===date
+);
+
+
+const isToday =
+date===today();
+
+
+let icons="";
+
+if(purchases.length){
+
+const unique =
+[...new Set(
+purchases.map(p=>{
+const item =
+data.items.find(
+i=>i.id===p.itemId
+);
+
+return item ? item.icon : "📦";
+})
+)];
+
+
+icons =
+unique
+.slice(0,3)
+.join(" ");
+
+}
+
+
+html+=`
+
+<div
+class="calendar-day ${isToday?"today":""}"
+onclick="openCalendarDay('${date}')">
+
+<div class="calendar-number">
+${day}
+</div>
+
+<div class="calendar-icons">
+${icons}
+</div>
+
+${purchases.length
+?
+`<div class="calendar-dots">
+<div class="dot"></div>
+<div class="dot"></div>
+</div>`
+:""}
+
+</div>
+
+`;
+
+}
+
+
+grid.innerHTML=html;
+
+renderTimeline();
+
+}
+
+
+/* =========================================
+   CALENDAR DAY
+========================================= */
+
+function openCalendarDay(date){
+
+const purchases =
+data.purchases.filter(
+p=>p.date===date
+);
+
+
+let html=`
+
+<div class="modal-header">
+
+<h2>📅 ${formatDate(date)}</h2>
+
+<button
+class="close"
+onclick="closeModal()">
+✕
+</button>
+
+</div>
+
+`;
+
+
+if(purchases.length===0){
+
+html+=emptyState(
+"📭",
+"No purchases",
+"Nothing was recorded on this date."
+);
+
+}else{
+
+html+=purchases.map(p=>`
+
+<div class="timeline-entry">
+
+<div class="timeline-entry-icon">
+📦
+</div>
+
+<div class="timeline-entry-main">
+
+<strong>
+${escapeHtml(p.itemName)}
+</strong>
+
+<small>
++${p.quantity} • $${money(p.price)}
+${p.store ? " • "+escapeHtml(p.store):""}
+</small>
+
+</div>
+
+</div>
+
+`).join("");
+
+}
+
+
+openModal(html);
+
+}
+
+
+/* =========================================
+   TIMELINE
+========================================= */
+
+function renderTimeline(){
+
+const container =
+document.getElementById("timeline");
+
+if(!container) return;
+
+
+const sorted =
+[...data.purchases]
+.sort(
+(a,b)=>
+new Date(b.date)-new Date(a.date)
+);
+
+
+if(sorted.length===0){
+
+container.innerHTML=emptyState(
+"📅",
+"No purchase history",
+"Your purchase history will appear here."
+);
+
+return;
+
+}
+
+
+const groups={};
+
+
+sorted.forEach(p=>{
+
+if(!groups[p.date]){
+groups[p.date]=[];
+}
+
+groups[p.date].push(p);
+
+});
+
+
+container.innerHTML =
+Object.keys(groups)
+.map(date=>`
+
+<div class="timeline-date">
+${formatDate(date)}
+</div>
+
+${groups[date].map(p=>`
+
+<div class="timeline-entry">
+
+<div class="timeline-entry-icon">
+📦
+</div>
+
+<div class="timeline-entry-main">
+
+<strong>
+${escapeHtml(p.itemName)}
+</strong>
+
+<small>
++${p.quantity}
+${p.store ? " • "+escapeHtml(p.store):""}
+• $${money(p.price)}
+</small>
+
+</div>
+
+</div>
+
+`).join("")}
+
+`).join("");
+
+}
+
+
+/* =========================================
+   STATS
+========================================= */
+
+function renderStats(){
+
+const value =
+data.items.reduce(
+(sum,i)=>
+sum+(i.quantity*i.price),
+0
+);
+
+
+document.getElementById("statsValue")
+.textContent="$"+money(value);
+
+
+const categories={
+Kitchen:0,
+Bathroom:0,
+Cleaning:0,
+Other:0
+};
+
+
+data.items.forEach(item=>{
+
+const v =
+item.quantity*item.price;
+
+
+if(
+categories[item.category]!==undefined
+){
+
+categories[item.category]+=v;
+
+}else{
+
+categories.Other+=v;
+
+}
+
+});
+
+
+document.getElementById("kitchenValue")
+.textContent="$"+money(categories.Kitchen);
+
+document.getElementById("bathroomValue")
+.textContent="$"+money(categories.Bathroom);
+
+document.getElementById("cleaningValue")
+.textContent="$"+money(categories.Cleaning);
+
+document.getElementById("otherValue")
+.textContent="$"+money(categories.Other);
+
+
+renderMonthlyStats();
+
+}
+
+
+/* =========================================
+   MONTHLY STATS
+========================================= */
+
+function renderMonthlyStats(){
+
+const container =
+document.getElementById("monthlyStats");
+
+if(!container) return;
+
+
+const months={};
+
+
+data.purchases.forEach(p=>{
+
+const month =
+p.date.substring(0,7);
+
+if(!months[month]){
+months[month]=0;
+}
+
+months[month]+=
+p.quantity*p.price;
+
+});
+
+
+const keys =
+Object.keys(months)
+.sort()
+.reverse()
+.slice(0,12);
+
+
+if(keys.length===0){
+
+container.innerHTML=emptyState(
+"💰",
+"No purchase data",
+"Your monthly spending will appear here."
+);
+
+return;
+
+}
+
+
+container.innerHTML =
+keys.map(month=>`
+
+<div class="month-summary">
+
+<span>
+${formatMonth(month)}
+</span>
+
+<strong>
+$${money(months[month])}
+</strong>
+
+</div>
+
+`).join("");
+
+}
+
+
+/* =========================================
+   SETTINGS
+========================================= */
+
+function openSettings(){
+
+openModal(`
+
+<div class="modal-header">
+
+<h2>⚙️ Settings</h2>
+
+<button
+class="close"
+onclick="closeModal()">
+✕
+</button>
+
+</div>
+
+
+<div class="card"
+style="box-shadow:none;padding:0">
+
+<h3 style="margin-bottom:8px">
+💾 Backup
+</h3>
+
+<p
+style="
+color:var(--muted);
+font-size:13px;
+line-height:1.5;
+margin-bottom:12px;
+">
+
+Download a backup of your inventory,
+shopping list and purchase history.
+
+</p>
+
+<button
+class="primary-button"
+onclick="exportBackup()">
+📤 Export Backup
+</button>
+
+<label
+class="primary-button"
+style="
+display:block;
+text-align:center;
+cursor:pointer;
+">
+
+📥 Import Backup
+
+<input
+type="file"
+accept=".json"
+style="display:none"
+onchange="importBackup(event)">
+
+</label>
+
+</div>
+
+
+<div class="card"
+style="box-shadow:none;padding:0;margin-top:15px">
+
+<h3 style="margin-bottom:8px">
+🗑 Data
+</h3>
+
+<button
+class="small-button danger"
+onclick="clearAllData()">
+Delete All Data
+</button>
+
+</div>
+
+`);
+
+}
+
+
+/* =========================================
+   DARK MODE
+========================================= */
+
+function toggleDarkMode(){
+
+data.settings.dark =
+!data.settings.dark;
+
+applyTheme();
+
+saveData();
+
+}
+
+
+function applyTheme(){
+
+document.body.classList.toggle(
+"dark",
+data.settings.dark
+);
+
+}
+
+
+applyTheme();
+
+
+/* =========================================
+   BACKUP EXPORT
+========================================= */
+
+function exportBackup(){
+
+const json =
+JSON.stringify(
+data,
+null,
+2
+);
+
+
+const blob =
+new Blob(
+[json],
+{
+type:"application/json"
+}
+);
+
+
+const url =
+URL.createObjectURL(blob);
+
+
+const a =
+document.createElement("a");
+
+a.href=url;
+
+a.download=
+"home-stock-backup-" +
+today() +
+".json";
+
+a.click();
+
+URL.revokeObjectURL(url);
+
+toast("Backup downloaded ✓");
+
+}
+
+
+/* =========================================
+   BACKUP IMPORT
+========================================= */
+
+function importBackup(event){
+
+const file =
+event.target.files[0];
+
+if(!file) return;
+
+
+const reader =
+new FileReader();
+
+
+reader.onload=function(){
+
+try{
+
+const imported =
+JSON.parse(reader.result);
+
+
+if(
+!imported.items ||
+!imported.shopping ||
+!imported.purchases
+){
+
+throw new Error();
+
+}
+
+
+if(
+!confirm(
+"Import this backup? Your current data will be replaced."
+)
+){
+
+return;
+
+}
+
+
+data=imported;
+
+saveData();
+
+closeModal();
+
+applyTheme();
+
+renderAll();
+
+toast("Backup restored ✓");
+
+}catch(e){
+
+alert(
+"This backup file is not valid."
+);
+
+}
+
+};
+
+
+reader.readAsText(file);
+
+}
+
+
+/* =========================================
+   CLEAR
+========================================= */
+
+function clearAllData(){
+
+if(
+!confirm(
+"Delete ALL Home Stock data? This cannot be undone."
+)
+){
+
+return;
+
+}
+
+
+data={
+items:[],
+shopping:[],
+purchases:[],
+settings:{
+dark:false
+}
+};
+
+
+saveData();
+
+closeModal();
+
+renderAll();
+
+toast("All data deleted");
+
+}
+
+
+/* =========================================
+   HELPERS
+========================================= */
+
+function today(){
+
+return formatISO(new Date());
+
+}
+
+
+function formatISO(date){
+
+const y =
+date.getFullYear();
+
+const m =
+String(
+date.getMonth()+1
+).padStart(2,"0");
+
+const d =
+String(
+date.getDate()
+).padStart(2,"0");
+
+return `${y}-${m}-${d}`;
+
+}
+
+
+function formatDate(date){
+
+if(!date) return "Not recorded";
+
+
+const parts =
+date.split("-");
+
+if(parts.length!==3)
+return date;
+
+
+return (
+parts[2]+"/"+
+parts[1]+"/"+
+parts[0]
+);
+
+}
+
+
+function formatMonth(month){
+
+const parts =
+month.split("-");
+
+const date =
+new Date(
+Number(parts[0]),
+Number(parts[1])-1,
+1
+);
+
+
+return date.toLocaleDateString(
+"en-CA",
+{
+month:"long",
+year:"numeric"
+}
+);
+
+}
+
+
+function money(number){
+
+return Number(number||0)
+.toFixed(2);
+
+}
+
+
+function emptyState(icon,title,text){
+
+return `
+
+<div class="empty">
+
+<div class="empty-icon">
+${icon}
+</div>
+
+<div class="empty-title">
+${title}
+</div>
+
+<div>
+${text}
+</div>
+
+</div>
+
+`;
+
+}
+
+
+function escapeHtml(value){
+
+return String(value ?? "")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+
+function categoryOptions(selected){
+
+const list=[
+"Kitchen",
+"Bathroom",
+"Cleaning",
+"Pantry",
+"Personal Care",
+"Pet",
+"Other"
+];
+
+
+return list.map(x=>
+`<option ${x===selected?"selected":""}>${x}</option>`
+).join("");
+
+}
+
+
+function unitOptions(selected){
+
+const list=[
+"pcs",
+"rolls",
+"cans",
+"bottles",
+"boxes",
+"bags",
+"packs",
+"kg",
+"L"
+];
+
+
+return list.map(x=>
+`<option ${x===selected?"selected":""}>${x}</option>`
+).join("");
+
+}
+
+
+/* =========================================
+   RENDER ALL
+========================================= */
+
+function renderAll(){
+
+renderHome();
+
+renderInventory();
+
+renderShopping();
+
+renderCalendar();
+
+renderStats();
+
+}
+
+
+/* =========================================
+   START
+========================================= */
+
+renderAll();
+
+</script>
+
+</body>
+</html>
