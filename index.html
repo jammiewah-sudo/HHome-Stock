@@ -1,8 +1,12 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-HK">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 <title>家居庫存</title>
 
@@ -11,836 +15,855 @@
 <style>
 
 *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    -webkit-tap-highlight-color:transparent;
+box-sizing:border-box;
+margin:0;
+padding:0;
+-webkit-tap-highlight-color:transparent;
 }
 
 :root{
-    --bg:#f7f3ee;
-    --card:#ffffff;
-    --text:#40372f;
-    --muted:#8d8177;
-    --primary:#b9825d;
-    --primary-dark:#986844;
-    --border:#eee6df;
-    --soft:#f4eee8;
-    --danger:#d96b67;
-    --danger-bg:#fff0ef;
-    --success:#6d9c71;
-    --success-bg:#edf7ed;
-    --warning:#c58a43;
-    --warning-bg:#fff5e3;
-    --shadow:0 5px 25px rgba(70,50,35,.07);
+--bg:#f7f3ee;
+--card:#ffffff;
+--text:#40372f;
+--muted:#8d8177;
+--primary:#b9825d;
+--primary-dark:#986844;
+--border:#eee6df;
+--soft:#f4eee8;
+--danger:#d96b67;
+--danger-bg:#fff0ef;
+--success:#6d9c71;
+--success-bg:#edf7ed;
+--warning:#c58a43;
+--warning-bg:#fff5e3;
+--shadow:0 5px 25px rgba(70,50,35,.07);
 }
 
 body.dark{
-    --bg:#171513;
-    --card:#24211e;
-    --text:#f5eee7;
-    --muted:#aaa098;
-    --primary:#d09a72;
-    --primary-dark:#b67c54;
-    --border:#3a342f;
-    --soft:#302b27;
-    --danger:#ef8c87;
-    --danger-bg:#3a2423;
-    --success:#8fbd92;
-    --success-bg:#253527;
-    --warning:#e0aa63;
-    --warning-bg:#3b3021;
-    --shadow:0 5px 25px rgba(0,0,0,.2);
+--bg:#171513;
+--card:#24211e;
+--text:#f5eee7;
+--muted:#aaa098;
+--primary:#d09a72;
+--primary-dark:#b67c54;
+--border:#3a342f;
+--soft:#302b27;
+--danger:#ef8c87;
+--danger-bg:#3a2423;
+--success:#8fbd92;
+--success-bg:#253527;
+--warning:#e0aa63;
+--warning-bg:#3b3021;
+--shadow:0 5px 25px rgba(0,0,0,.2);
 }
 
 body{
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI","Noto Sans TC",sans-serif;
-    background:var(--bg);
-    color:var(--text);
-    min-height:100vh;
+font-family:
+-apple-system,
+BlinkMacSystemFont,
+"SF Pro Display",
+"Segoe UI",
+sans-serif;
+background:var(--bg);
+color:var(--text);
+min-height:100vh;
 }
 
 button,
 input,
 select{
-    font:inherit;
+font:inherit;
 }
 
 button{
-    cursor:pointer;
+cursor:pointer;
 }
 
 .app{
-    max-width:900px;
-    margin:0 auto;
-    padding:20px 18px 110px;
+max-width:900px;
+margin:0 auto;
+padding:20px 18px 110px;
 }
 
 header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-bottom:24px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-bottom:24px;
 }
 
 .logo-area{
-    display:flex;
-    align-items:center;
-    gap:12px;
+display:flex;
+align-items:center;
+gap:12px;
 }
 
 .logo{
-    width:55px;
-    height:55px;
-    border-radius:18px;
-    background:linear-gradient(135deg,#f0d4be,#c68e67);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:29px;
-    box-shadow:var(--shadow);
+width:55px;
+height:55px;
+border-radius:18px;
+background:linear-gradient(135deg,#f0d4be,#c68e67);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:29px;
+box-shadow:var(--shadow);
 }
 
 h1{
-    font-size:28px;
-    letter-spacing:-.5px;
+font-size:28px;
+letter-spacing:-.5px;
 }
 
 .subtitle{
-    color:var(--muted);
-    font-size:13px;
-    margin-top:3px;
+color:var(--muted);
+font-size:13px;
+margin-top:3px;
 }
 
 .header-actions{
-    display:flex;
-    gap:8px;
+display:flex;
+gap:8px;
 }
 
 .icon-btn{
-    width:44px;
-    height:44px;
-    border:0;
-    border-radius:15px;
-    background:var(--card);
-    color:var(--text);
-    box-shadow:var(--shadow);
-    font-size:19px;
+width:44px;
+height:44px;
+border:0;
+border-radius:15px;
+background:var(--card);
+color:var(--text);
+box-shadow:var(--shadow);
+font-size:19px;
 }
 
 .page{
-    display:none;
+display:none;
 }
 
 .page.active{
-    display:block;
-    animation:appear .2s ease;
+display:block;
+animation:appear .2s ease;
 }
 
 @keyframes appear{
-    from{
-        opacity:0;
-        transform:translateY(5px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+from{
+opacity:0;
+transform:translateY(5px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
 }
 
 .section-title{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:13px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:13px;
 }
 
 .section-title h2{
-    font-size:21px;
+font-size:21px;
 }
 
 .section-title span{
-    color:var(--muted);
-    font-size:13px;
+color:var(--muted);
+font-size:13px;
 }
 
 .dashboard-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;
-    margin-bottom:22px;
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:12px;
+margin-bottom:22px;
 }
 
 .stat-card{
-    background:var(--card);
-    border-radius:22px;
-    padding:18px;
-    box-shadow:var(--shadow);
+background:var(--card);
+border-radius:22px;
+padding:18px;
+box-shadow:var(--shadow);
 }
 
 .stat-icon{
-    font-size:27px;
-    margin-bottom:10px;
+font-size:27px;
+margin-bottom:10px;
 }
 
 .stat-number{
-    font-size:28px;
-    font-weight:750;
+font-size:28px;
+font-weight:750;
 }
 
 .stat-label{
-    color:var(--muted);
-    font-size:13px;
-    margin-top:3px;
+color:var(--muted);
+font-size:13px;
+margin-top:3px;
 }
 
 .quick-actions{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;
-    margin-bottom:24px;
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:12px;
+margin-bottom:24px;
 }
 
 .quick{
-    border:0;
-    border-radius:20px;
-    padding:17px;
-    text-align:left;
-    background:var(--card);
-    color:var(--text);
-    box-shadow:var(--shadow);
+border:0;
+border-radius:20px;
+padding:17px;
+text-align:left;
+background:var(--card);
+color:var(--text);
+box-shadow:var(--shadow);
 }
 
 .quick-icon{
-    font-size:27px;
-    margin-bottom:7px;
+font-size:27px;
+margin-bottom:7px;
 }
 
 .quick-title{
-    font-weight:700;
+font-weight:700;
 }
 
 .quick-sub{
-    color:var(--muted);
-    font-size:12px;
-    margin-top:3px;
+color:var(--muted);
+font-size:12px;
+margin-top:3px;
 }
 
 .card{
-    background:var(--card);
-    border-radius:22px;
-    padding:18px;
-    box-shadow:var(--shadow);
-    margin-bottom:16px;
+background:var(--card);
+border-radius:22px;
+padding:18px;
+box-shadow:var(--shadow);
+margin-bottom:16px;
 }
 
 .item-card{
-    background:var(--card);
-    border-radius:20px;
-    padding:16px;
-    box-shadow:var(--shadow);
-    margin-bottom:11px;
+background:var(--card);
+border-radius:20px;
+padding:16px;
+box-shadow:var(--shadow);
+margin-bottom:11px;
 }
 
 .item-row{
-    display:flex;
-    align-items:center;
-    gap:13px;
+display:flex;
+align-items:center;
+gap:13px;
 }
 
 .item-icon{
-    width:50px;
-    height:50px;
-    border-radius:16px;
-    background:var(--soft);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:26px;
-    flex-shrink:0;
+width:50px;
+height:50px;
+border-radius:16px;
+background:var(--soft);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:26px;
+flex-shrink:0;
 }
 
 .item-main{
-    flex:1;
-    min-width:0;
+flex:1;
+min-width:0;
 }
 
 .item-name{
-    font-weight:750;
-    font-size:16px;
+font-weight:750;
+font-size:16px;
 }
 
 .item-category{
-    color:var(--muted);
-    font-size:12px;
-    margin-top:3px;
+color:var(--muted);
+font-size:12px;
+margin-top:3px;
 }
 
 .item-qty{
-    text-align:right;
-    font-weight:700;
+text-align:right;
+font-weight:700;
 }
 
 .qty-number{
-    font-size:18px;
+font-size:18px;
 }
 
 .qty-unit{
-    color:var(--muted);
-    font-size:11px;
+color:var(--muted);
+font-size:11px;
 }
 
 .status{
-    display:inline-flex;
-    align-items:center;
-    gap:4px;
-    padding:5px 9px;
-    border-radius:20px;
-    font-size:11px;
-    font-weight:700;
-    margin-top:8px;
+display:inline-flex;
+align-items:center;
+gap:4px;
+padding:5px 9px;
+border-radius:20px;
+font-size:11px;
+font-weight:700;
+margin-top:8px;
 }
 
 .status.ok{
-    color:var(--success);
-    background:var(--success-bg);
+color:var(--success);
+background:var(--success-bg);
 }
 
 .status.low{
-    color:var(--warning);
-    background:var(--warning-bg);
+color:var(--warning);
+background:var(--warning-bg);
 }
 
 .status.out{
-    color:var(--danger);
-    background:var(--danger-bg);
+color:var(--danger);
+background:var(--danger-bg);
 }
 
 .item-info{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-    margin-top:12px;
-    padding-top:12px;
-    border-top:1px solid var(--border);
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+margin-top:12px;
+padding-top:12px;
+border-top:1px solid var(--border);
 }
 
 .info-chip{
-    background:var(--soft);
-    padding:7px 10px;
-    border-radius:10px;
-    font-size:11px;
-    color:var(--muted);
+background:var(--soft);
+padding:7px 10px;
+border-radius:10px;
+font-size:11px;
+color:var(--muted);
 }
 
 .item-buttons{
-    display:flex;
-    gap:7px;
-    margin-top:12px;
+display:flex;
+gap:7px;
+margin-top:12px;
 }
 
 .small-button{
-    flex:1;
-    border:0;
-    border-radius:12px;
-    padding:9px;
-    background:var(--soft);
-    color:var(--text);
-    font-size:13px;
-    font-weight:600;
+flex:1;
+border:0;
+border-radius:12px;
+padding:9px;
+background:var(--soft);
+color:var(--text);
+font-size:13px;
+font-weight:600;
 }
 
 .small-button.primary{
-    background:var(--primary);
-    color:white;
+background:var(--primary);
+color:white;
 }
 
 .small-button.danger{
-    background:var(--danger-bg);
-    color:var(--danger);
+background:var(--danger-bg);
+color:var(--danger);
 }
 
 .search-box{
-    position:relative;
-    margin-bottom:14px;
+position:relative;
+margin-bottom:14px;
 }
 
 .search-box input{
-    padding-left:43px;
+padding-left:43px;
 }
 
 .search-icon{
-    position:absolute;
-    left:15px;
-    top:14px;
-    font-size:16px;
+position:absolute;
+left:15px;
+top:14px;
+font-size:16px;
 }
 
 input,
 select{
-    width:100%;
-    border:1px solid transparent;
-    outline:none;
-    background:var(--soft);
-    color:var(--text);
-    border-radius:14px;
-    padding:13px 14px;
-    font-size:15px;
+width:100%;
+border:1px solid transparent;
+outline:none;
+background:var(--soft);
+color:var(--text);
+border-radius:14px;
+padding:13px 14px;
+font-size:15px;
 }
 
 input:focus,
 select:focus{
-    border-color:var(--primary);
+border-color:var(--primary);
 }
 
 label{
-    display:block;
-    font-size:12px;
-    color:var(--muted);
-    margin:12px 0 6px;
-    font-weight:600;
+display:block;
+font-size:12px;
+color:var(--muted);
+margin:12px 0 6px;
+font-weight:600;
 }
 
 .form-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
 }
 
 .full{
-    grid-column:1 / -1;
+grid-column:1 / -1;
 }
 
 .primary-button{
-    width:100%;
-    border:0;
-    background:var(--primary);
-    color:white;
-    border-radius:15px;
-    padding:14px;
-    font-weight:700;
-    margin-top:16px;
+width:100%;
+border:0;
+background:var(--primary);
+color:white;
+border-radius:15px;
+padding:14px;
+font-weight:700;
+margin-top:16px;
 }
 
 .primary-button:active{
-    background:var(--primary-dark);
+background:var(--primary-dark);
 }
 
 .cancel-button{
-    width:100%;
-    border:0;
-    background:var(--soft);
-    color:var(--text);
-    border-radius:15px;
-    padding:14px;
-    font-weight:700;
-    margin-top:9px;
+width:100%;
+border:0;
+background:var(--soft);
+color:var(--text);
+border-radius:15px;
+padding:14px;
+font-weight:700;
+margin-top:9px;
 }
 
 .category-scroll{
-    display:flex;
-    gap:8px;
-    overflow-x:auto;
-    padding-bottom:4px;
-    margin-bottom:15px;
+display:flex;
+gap:8px;
+overflow-x:auto;
+padding-bottom:4px;
+margin-bottom:15px;
 }
 
 .category-scroll::-webkit-scrollbar{
-    display:none;
+display:none;
 }
 
 .category-btn{
-    white-space:nowrap;
-    border:0;
-    background:var(--card);
-    color:var(--text);
-    border-radius:20px;
-    padding:9px 13px;
-    box-shadow:var(--shadow);
-    font-size:12px;
+white-space:nowrap;
+border:0;
+background:var(--card);
+color:var(--text);
+border-radius:20px;
+padding:9px 13px;
+box-shadow:var(--shadow);
+font-size:12px;
 }
 
 .category-btn.active{
-    background:var(--primary);
-    color:white;
+background:var(--primary);
+color:white;
 }
 
 .empty{
-    text-align:center;
-    padding:40px 20px;
-    color:var(--muted);
+text-align:center;
+padding:40px 20px;
+color:var(--muted);
 }
 
 .empty-icon{
-    font-size:45px;
-    margin-bottom:10px;
+font-size:45px;
+margin-bottom:10px;
 }
 
 .empty-title{
-    font-weight:700;
-    color:var(--text);
-    margin-bottom:5px;
+font-weight:700;
+color:var(--text);
+margin-bottom:5px;
 }
 
 .shopping-row{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    padding:14px 0;
-    border-bottom:1px solid var(--border);
+display:flex;
+align-items:center;
+gap:12px;
+padding:14px 0;
+border-bottom:1px solid var(--border);
 }
 
 .shopping-row:last-child{
-    border-bottom:0;
+border-bottom:0;
 }
 
 .check{
-    width:25px;
-    height:25px;
-    border-radius:8px;
-    border:2px solid var(--primary);
-    background:transparent;
-    flex-shrink:0;
-}
-
-.check.done{
-    background:var(--primary);
-    color:white;
+width:25px;
+height:25px;
+border-radius:8px;
+border:2px solid var(--primary);
+background:transparent;
+flex-shrink:0;
 }
 
 .shopping-name{
-    flex:1;
+flex:1;
 }
 
 .shopping-name strong{
-    display:block;
+display:block;
 }
 
 .shopping-name small{
-    color:var(--muted);
+color:var(--muted);
 }
 
 .calendar-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:18px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:18px;
 }
 
 .calendar-head button{
-    border:0;
-    background:var(--soft);
-    color:var(--text);
-    border-radius:12px;
-    width:40px;
-    height:40px;
+border:0;
+background:var(--soft);
+color:var(--text);
+border-radius:12px;
+width:40px;
+height:40px;
 }
 
 .calendar-title{
-    font-weight:750;
-    font-size:18px;
+font-weight:750;
+font-size:18px;
 }
 
 .calendar-week{
-    display:grid;
-    grid-template-columns:repeat(7,1fr);
-    text-align:center;
-    color:var(--muted);
-    font-size:11px;
-    font-weight:700;
-    margin-bottom:7px;
+display:grid;
+grid-template-columns:repeat(7,1fr);
+text-align:center;
+color:var(--muted);
+font-size:11px;
+font-weight:700;
+margin-bottom:7px;
 }
 
 .calendar-grid{
-    display:grid;
-    grid-template-columns:repeat(7,1fr);
-    gap:5px;
+display:grid;
+grid-template-columns:repeat(7,1fr);
+gap:5px;
 }
 
 .calendar-day{
-    min-height:58px;
-    border-radius:13px;
-    background:var(--soft);
-    padding:7px 3px;
-    text-align:center;
-    cursor:pointer;
+min-height:58px;
+border-radius:13px;
+background:var(--soft);
+padding:7px 3px;
+text-align:center;
+cursor:pointer;
 }
 
 .calendar-day.empty-day{
-    background:transparent;
-    cursor:default;
+background:transparent;
+cursor:default;
 }
 
 .calendar-day.today{
-    outline:2px solid var(--primary);
+outline:2px solid var(--primary);
 }
 
 .calendar-number{
-    font-weight:700;
-    font-size:13px;
+font-weight:700;
+font-size:13px;
 }
 
 .calendar-icons{
-    font-size:13px;
-    margin-top:6px;
-    min-height:16px;
+font-size:13px;
+margin-top:6px;
+min-height:16px;
 }
 
 .calendar-dots{
-    display:flex;
-    justify-content:center;
-    gap:3px;
-    margin-top:4px;
+display:flex;
+justify-content:center;
+gap:3px;
+margin-top:4px;
 }
 
 .dot{
-    width:5px;
-    height:5px;
-    border-radius:50%;
-    background:var(--primary);
-}
-
-.month-nav{
-    display:flex;
-    align-items:center;
-    gap:8px;
+width:5px;
+height:5px;
+border-radius:50%;
+background:var(--primary);
 }
 
 .timeline-date{
-    font-weight:750;
-    margin:17px 0 8px;
-    font-size:14px;
+font-weight:750;
+margin:17px 0 8px;
+font-size:14px;
 }
 
 .timeline-entry{
-    background:var(--card);
-    border-radius:16px;
-    padding:13px;
-    box-shadow:var(--shadow);
-    margin-bottom:8px;
-    display:flex;
-    gap:10px;
-    align-items:center;
+background:var(--card);
+border-radius:16px;
+padding:13px;
+box-shadow:var(--shadow);
+margin-bottom:8px;
+display:flex;
+gap:10px;
+align-items:center;
 }
 
 .timeline-entry-icon{
-    font-size:23px;
+font-size:23px;
 }
 
 .timeline-entry-main{
-    flex:1;
+flex:1;
 }
 
 .timeline-entry-main strong{
-    font-size:14px;
+font-size:14px;
 }
 
 .timeline-entry-main small{
-    display:block;
-    color:var(--muted);
-    margin-top:3px;
+display:block;
+color:var(--muted);
+margin-top:3px;
 }
 
 .total-box{
-    text-align:center;
-    padding:25px 10px;
+text-align:center;
+padding:25px 10px;
 }
 
 .total-label{
-    color:var(--muted);
-    font-size:13px;
+color:var(--muted);
+font-size:13px;
 }
 
 .total-value{
-    font-size:43px;
-    font-weight:800;
-    margin-top:5px;
+font-size:43px;
+font-weight:800;
+margin-top:5px;
 }
 
 .breakdown-row{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:13px 0;
-    border-bottom:1px solid var(--border);
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:13px 0;
+border-bottom:1px solid var(--border);
 }
 
 .breakdown-left{
-    display:flex;
-    align-items:center;
-    gap:9px;
+display:flex;
+align-items:center;
+gap:9px;
 }
 
 .breakdown-dot{
-    width:10px;
-    height:10px;
-    border-radius:50%;
-    background:var(--primary);
+width:10px;
+height:10px;
+border-radius:50%;
+background:var(--primary);
 }
 
 .month-summary{
-    display:flex;
-    justify-content:space-between;
-    padding:14px 0;
-    border-bottom:1px solid var(--border);
+display:flex;
+justify-content:space-between;
+padding:14px 0;
+border-bottom:1px solid var(--border);
 }
 
 .month-summary:last-child{
-    border-bottom:0;
+border-bottom:0;
+}
+
+.store-row{
+display:flex;
+align-items:center;
+gap:10px;
+padding:12px 0;
+border-bottom:1px solid var(--border);
+}
+
+.store-row:last-child{
+border-bottom:0;
+}
+
+.store-name{
+flex:1;
+font-weight:600;
+}
+
+.store-delete{
+border:0;
+background:var(--danger-bg);
+color:var(--danger);
+border-radius:10px;
+padding:7px 10px;
 }
 
 .modal{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.42);
-    display:none;
-    align-items:flex-end;
-    justify-content:center;
-    z-index:1000;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.42);
+display:none;
+align-items:flex-end;
+justify-content:center;
+z-index:1000;
 }
 
 .modal.show{
-    display:flex;
+display:flex;
 }
 
 .modal-sheet{
-    width:100%;
-    max-width:650px;
-    max-height:92vh;
-    overflow-y:auto;
-    background:var(--card);
-    border-radius:28px 28px 0 0;
-    padding:22px 18px 30px;
-    animation:slideUp .25s ease;
+width:100%;
+max-width:650px;
+max-height:92vh;
+overflow-y:auto;
+background:var(--card);
+border-radius:28px 28px 0 0;
+padding:22px 18px 30px;
+animation:slideUp .25s ease;
 }
 
 @keyframes slideUp{
-    from{
-        transform:translateY(100%);
-    }
-    to{
-        transform:translateY(0);
-    }
+from{
+transform:translateY(100%);
+}
+to{
+transform:translateY(0);
+}
 }
 
 .modal-handle{
-    width:42px;
-    height:5px;
-    border-radius:5px;
-    background:var(--border);
-    margin:0 auto 18px;
+width:42px;
+height:5px;
+border-radius:5px;
+background:var(--border);
+margin:0 auto 18px;
 }
 
 .modal-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:15px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:15px;
 }
 
 .modal-header h2{
-    font-size:21px;
+font-size:21px;
 }
 
 .close{
-    border:0;
-    background:var(--soft);
-    color:var(--text);
-    width:38px;
-    height:38px;
-    border-radius:12px;
+border:0;
+background:var(--soft);
+color:var(--text);
+width:38px;
+height:38px;
+border-radius:12px;
 }
 
 .bottom-nav{
-    position:fixed;
-    bottom:0;
-    left:50%;
-    transform:translateX(-50%);
-    width:100%;
-    max-width:900px;
-    background:var(--card);
-    border-top:1px solid var(--border);
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    padding:9px 8px calc(9px + env(safe-area-inset-bottom));
-    z-index:900;
+position:fixed;
+bottom:0;
+left:50%;
+transform:translateX(-50%);
+width:100%;
+max-width:900px;
+background:var(--card);
+border-top:1px solid var(--border);
+display:grid;
+grid-template-columns:repeat(4,1fr);
+padding:9px 8px calc(9px + env(safe-area-inset-bottom));
+z-index:900;
 }
 
 .nav-btn{
-    border:0;
-    background:transparent;
-    color:var(--muted);
-    padding:7px 3px;
-    font-size:11px;
+border:0;
+background:transparent;
+color:var(--muted);
+padding:7px 3px;
+font-size:11px;
 }
 
 .nav-icon{
-    font-size:20px;
-    display:block;
-    margin-bottom:3px;
+font-size:20px;
+display:block;
+margin-bottom:3px;
 }
 
 .nav-btn.active{
-    color:var(--primary);
-    font-weight:750;
+color:var(--primary);
+font-weight:750;
 }
 
 .toast{
-    position:fixed;
-    left:50%;
-    bottom:90px;
-    transform:translateX(-50%) translateY(20px);
-    background:#302a25;
-    color:white;
-    padding:12px 18px;
-    border-radius:14px;
-    font-size:13px;
-    opacity:0;
-    pointer-events:none;
-    transition:.25s;
-    z-index:2000;
-    white-space:nowrap;
+position:fixed;
+left:50%;
+bottom:90px;
+transform:translateX(-50%) translateY(20px);
+background:#302a25;
+color:white;
+padding:12px 18px;
+border-radius:14px;
+font-size:13px;
+opacity:0;
+pointer-events:none;
+transition:.25s;
+z-index:2000;
+white-space:nowrap;
 }
 
 .toast.show{
-    opacity:1;
-    transform:translateX(-50%) translateY(0);
+opacity:1;
+transform:translateX(-50%) translateY(0);
 }
 
 @media(max-width:500px){
 
-    .app{
-        padding-left:14px;
-        padding-right:14px;
-    }
+.app{
+padding-left:14px;
+padding-right:14px;
+}
 
-    h1{
-        font-size:25px;
-    }
+h1{
+font-size:25px;
+}
 
-    .dashboard-grid{
-        gap:9px;
-    }
+.dashboard-grid{
+gap:9px;
+}
 
-    .stat-card{
-        padding:14px;
-    }
+.stat-card{
+padding:14px;
+}
 
-    .stat-number{
-        font-size:24px;
-    }
+.stat-number{
+font-size:24px;
+}
 
-    .form-grid{
-        grid-template-columns:1fr;
-    }
+.form-grid{
+grid-template-columns:1fr;
+}
 
-    .full{
-        grid-column:auto;
-    }
+.full{
+grid-column:auto;
+}
 
-    .calendar-day{
-        min-height:54px;
-    }
+.calendar-day{
+min-height:54px;
+}
 
 }
 
@@ -860,8 +883,13 @@ label{
 </div>
 
 <div>
+
 <h1>家居庫存</h1>
-<div class="subtitle">清楚屋企有咩，唔使重複買嘢</div>
+
+<div class="subtitle">
+知道屋企有咩，只買真正需要嘅嘢
+</div>
+
 </div>
 
 </div>
@@ -885,7 +913,7 @@ onclick="openSettings()">
 </header>
 
 
-<!-- 首頁 -->
+<!-- HOME -->
 
 <section
 id="home"
@@ -909,6 +937,7 @@ id="homeTotal">
 
 </div>
 
+
 <div class="stat-card">
 
 <div class="stat-icon">⚠️</div>
@@ -924,6 +953,7 @@ id="homeLow">
 </div>
 
 </div>
+
 
 <div class="stat-card">
 
@@ -941,6 +971,7 @@ id="homeShopping">
 
 </div>
 
+
 <div class="stat-card">
 
 <div class="stat-icon">💰</div>
@@ -952,7 +983,7 @@ $0
 </div>
 
 <div class="stat-label">
-估算庫存價值
+目前庫存價值
 </div>
 
 </div>
@@ -965,6 +996,7 @@ $0
 <h2>快速操作</h2>
 
 </div>
+
 
 <div class="quick-actions">
 
@@ -981,10 +1013,11 @@ onclick="openAddItem()">
 </div>
 
 <div class="quick-sub">
-加入屋企平時會儲備嘅物品
+加入屋企平時會儲存嘅物品
 </div>
 
 </button>
+
 
 <button
 class="quick"
@@ -999,7 +1032,7 @@ onclick="showPage('shopping')">
 </div>
 
 <div class="quick-sub">
-睇下有咩需要買
+睇吓有咩需要買
 </div>
 
 </button>
@@ -1019,12 +1052,13 @@ style="cursor:pointer">
 
 </div>
 
+
 <div id="homeLowList"></div>
 
 </section>
 
 
-<!-- 庫存 -->
+<!-- INVENTORY -->
 
 <section
 id="inventory"
@@ -1043,6 +1077,7 @@ onclick="openAddItem()">
 
 </div>
 
+
 <div class="search-box">
 
 <span class="search-icon">🔍</span>
@@ -1051,7 +1086,7 @@ onclick="openAddItem()">
 id="searchInput"
 type="search"
 placeholder="搜尋物品..."
-oninput="renderInventory">
+oninput="renderInventory()">
 
 </div>
 
@@ -1067,7 +1102,7 @@ id="categoryButtons">
 </section>
 
 
-<!-- 購物清單 -->
+<!-- SHOPPING -->
 
 <section
 id="shopping"
@@ -1078,10 +1113,11 @@ class="page">
 <h2>🛒 購物清單</h2>
 
 <span id="shoppingCount">
-0 項
+0 件
 </span>
 
 </div>
+
 
 <div class="card">
 
@@ -1098,7 +1134,7 @@ onclick="openAddShopping()">
 </section>
 
 
-<!-- 日曆 -->
+<!-- CALENDAR -->
 
 <section
 id="calendar"
@@ -1109,6 +1145,7 @@ class="page">
 <h2>📅 購買記錄</h2>
 
 </div>
+
 
 <div class="card">
 
@@ -1130,6 +1167,7 @@ id="calendarTitle">
 
 </div>
 
+
 <div class="calendar-week">
 
 <div>日</div>
@@ -1142,6 +1180,7 @@ id="calendarTitle">
 
 </div>
 
+
 <div
 class="calendar-grid"
 id="calendarGrid">
@@ -1152,16 +1191,17 @@ id="calendarGrid">
 
 <div class="section-title">
 
-<h2>🕒 時間線</h2>
+<h2>🕒 購買時間線</h2>
 
 </div>
+
 
 <div id="timeline"></div>
 
 </section>
 
 
-<!-- 統計 -->
+<!-- STATS -->
 
 <section
 id="stats"
@@ -1173,12 +1213,13 @@ class="page">
 
 </div>
 
+
 <div class="card">
 
 <div class="total-box">
 
 <div class="total-label">
-目前估算庫存價值
+目前庫存估計價值
 </div>
 
 <div
@@ -1189,48 +1230,60 @@ $0
 
 </div>
 
-<div
-class="breakdown-row">
+
+<div class="breakdown-row">
 
 <div class="breakdown-left">
+
 <div class="breakdown-dot"></div>
+
 廚房
+
 </div>
 
 <strong id="kitchenValue">$0</strong>
 
 </div>
 
-<div
-class="breakdown-row">
+
+<div class="breakdown-row">
 
 <div class="breakdown-left">
+
 <div class="breakdown-dot"></div>
+
 浴室
+
 </div>
 
 <strong id="bathroomValue">$0</strong>
 
 </div>
 
-<div
-class="breakdown-row">
+
+<div class="breakdown-row">
 
 <div class="breakdown-left">
+
 <div class="breakdown-dot"></div>
-清潔用品
+
+清潔
+
 </div>
 
 <strong id="cleaningValue">$0</strong>
 
 </div>
 
-<div
-class="breakdown-row">
+
+<div class="breakdown-row">
 
 <div class="breakdown-left">
+
 <div class="breakdown-dot"></div>
+
 其他
+
 </div>
 
 <strong id="otherValue">$0</strong>
@@ -1257,7 +1310,7 @@ class="breakdown-row">
 </section>
 
 
-<!-- 底部導航 -->
+<!-- BOTTOM NAV -->
 
 <nav class="bottom-nav">
 
@@ -1267,9 +1320,11 @@ data-page="home"
 onclick="showPage('home')">
 
 <span class="nav-icon">🏠</span>
+
 首頁
 
 </button>
+
 
 <button
 class="nav-btn"
@@ -1277,9 +1332,11 @@ data-page="inventory"
 onclick="showPage('inventory')">
 
 <span class="nav-icon">📦</span>
+
 庫存
 
 </button>
+
 
 <button
 class="nav-btn"
@@ -1287,9 +1344,11 @@ data-page="shopping"
 onclick="showPage('shopping')">
 
 <span class="nav-icon">🛒</span>
+
 購物
 
 </button>
+
 
 <button
 class="nav-btn"
@@ -1297,6 +1356,7 @@ data-page="stats"
 onclick="showPage('stats')">
 
 <span class="nav-icon">📊</span>
+
 統計
 
 </button>
@@ -1306,7 +1366,7 @@ onclick="showPage('stats')">
 </div>
 
 
-<!-- 彈出視窗 -->
+<!-- MODAL -->
 
 <div
 class="modal"
@@ -1333,32 +1393,68 @@ id="toast">
 <script>
 
 /* =========================================
-   HOME STOCK
-   資料
+   HOME STOCK ULTIMATE
 ========================================= */
 
-const STORAGE_KEY = "homeStockUltimateData";
+const STORAGE_KEY="homeStockUltimateData";
 
-let data =
-JSON.parse(localStorage.getItem(STORAGE_KEY)) || {
+let data=
+JSON.parse(localStorage.getItem(STORAGE_KEY))||{
 
 items:[],
 shopping:[],
 purchases:[],
+
 settings:{
-dark:false
+dark:false,
+
+/*
+   預設常用商店
+   你可以喺設定入面刪除
+*/
+stores:[
+"Costco",
+"Walmart",
+"No Frills",
+"Dollarama",
+"Amazon"
+]
+
 }
 
 };
 
 
-let selectedCategory = "All";
+/*
+   舊版本如果冇 stores
+   自動補返
+*/
 
-let calendarDate = new Date();
+if(!data.settings){
+data.settings={
+dark:false,
+stores:[]
+};
+}
+
+if(!Array.isArray(data.settings.stores)){
+data.settings.stores=[
+"Costco",
+"Walmart",
+"No Frills",
+"Dollarama",
+"Amazon"
+];
+}
+
+
+let selectedCategory="All";
+
+let calendarDate=new Date();
 
 
 /* =========================================
-   儲存
+   SAVE
 ========================================= */
 
 function saveData(){
@@ -1372,15 +1468,14 @@ JSON.stringify(data)
 
 
 /* =========================================
-   提示
+   TOAST
 ========================================= */
 
 function toast(message){
 
-const el =
-document.getElementById("toast");
+const el=document.getElementById("toast");
 
-el.textContent = message;
+el.textContent=message;
 
 el.classList.add("show");
 
@@ -1392,7 +1487,7 @@ el.classList.remove("show");
 
 
 /* =========================================
-   頁面
+   PAGE
 ========================================= */
 
 function showPage(page){
@@ -1403,6 +1498,7 @@ document
 p.classList.remove("active");
 });
 
+
 document
 .getElementById(page)
 .classList.add("active");
@@ -1411,6 +1507,7 @@ document
 document
 .querySelectorAll(".nav-btn")
 .forEach(btn=>{
+
 btn.classList.remove("active");
 
 if(btn.dataset.page===page){
@@ -1431,7 +1528,7 @@ behavior:"smooth"
 
 
 /* =========================================
-   彈出視窗
+   MODAL
 ========================================= */
 
 function openModal(html){
@@ -1458,17 +1555,117 @@ document
 
 document
 .getElementById("modal")
-.addEventListener("click",function(e){
+.addEventListener(
+"click",
+function(e){
 
 if(e.target===this){
 closeModal();
 }
 
-});
+}
+);
 
 
 /* =========================================
-   新增物品
+   STORE OPTIONS
+========================================= */
+
+function storeOptions(selected=""){
+
+const stores=[...data.settings.stores];
+
+let html=`
+
+<option value="">
+未選擇商店
+</option>
+
+`;
+
+stores.forEach(store=>{
+
+html+=`
+
+<option
+value="${escapeHtml(store)}"
+${store===selected?"selected":""}>
+
+${escapeHtml(store)}
+
+</option>
+
+`;
+
+});
+
+
+html+=`
+
+<option value="__NEW_STORE__">
+＋ 新增商店...
+</option>
+
+`;
+
+return html;
+
+}
+
+
+/* =========================================
+   STORE SELECT
+========================================= */
+
+function handleStoreSelect(selectId){
+
+const select=document.getElementById(selectId);
+
+if(!select) return;
+
+if(select.value==="__NEW_STORE__"){
+
+const newStore=prompt(
+"請輸入商店名稱："
+);
+
+if(newStore){
+
+const clean=newStore.trim();
+
+if(clean){
+
+if(
+!data.settings.stores.includes(clean)
+){
+
+data.settings.stores.push(clean);
+
+saveData();
+
+}
+
+select.innerHTML=
+storeOptions(clean);
+
+}
+
+}
+
+else{
+
+select.innerHTML=
+storeOptions("");
+
+}
+
+}
+
+}
+
+
+/* =========================================
+   ADD ITEM
 ========================================= */
 
 function openAddItem(){
@@ -1511,13 +1708,13 @@ value="📦">
 
 <select id="formCategory">
 
-<option value="Kitchen">廚房</option>
-<option value="Bathroom">浴室</option>
-<option value="Cleaning">清潔用品</option>
-<option value="Pantry">食品儲藏</option>
-<option value="Personal Care">個人護理</option>
-<option value="Pet">寵物用品</option>
-<option value="Other">其他</option>
+<option>廚房</option>
+<option>浴室</option>
+<option>清潔</option>
+<option>食品儲藏</option>
+<option>個人護理</option>
+<option>寵物</option>
+<option>其他</option>
 
 </select>
 
@@ -1530,15 +1727,15 @@ value="📦">
 
 <select id="formUnit">
 
-<option value="pcs">件</option>
-<option value="rolls">卷</option>
-<option value="cans">罐</option>
-<option value="bottles">支／樽</option>
-<option value="boxes">盒</option>
-<option value="bags">袋</option>
-<option value="packs">包</option>
-<option value="kg">公斤</option>
-<option value="L">公升</option>
+<option>件</option>
+<option>卷</option>
+<option>罐</option>
+<option>支</option>
+<option>盒</option>
+<option>包</option>
+<option>袋</option>
+<option>公斤</option>
+<option>公升</option>
 
 </select>
 
@@ -1564,7 +1761,7 @@ value="1">
 
 <div>
 
-<label>最低庫存數量</label>
+<label>最低存量</label>
 
 <input
 id="formMinimum"
@@ -1595,11 +1792,15 @@ placeholder="0.00">
 
 <div>
 
-<label>常用商店</label>
+<label>通常在哪裡買？</label>
 
-<input
+<select
 id="formStore"
-placeholder="例如：Costco">
+onchange="handleStoreSelect('formStore')">
+
+${storeOptions()}
+
+</select>
 
 </div>
 
@@ -1618,20 +1819,24 @@ value="${today()}">
 
 <input
 id="formNotes"
-placeholder="可選填">
+placeholder="例如：大包裝比較抵">
 
 
 <button
 class="primary-button"
 onclick="saveNewItem()">
+
 儲存物品
+
 </button>
 
 
 <button
 class="cancel-button"
 onclick="closeModal()">
+
 取消
+
 </button>
 
 `);
@@ -1640,13 +1845,15 @@ onclick="closeModal()">
 
 
 /* =========================================
-   儲存新物品
+   SAVE ITEM
 ========================================= */
 
 function saveNewItem(){
 
-const name =
-document.getElementById("formName").value.trim();
+const name=
+document.getElementById("formName")
+.value
+.trim();
 
 if(!name){
 
@@ -1657,6 +1864,10 @@ return;
 }
 
 
+const storeValue=
+document.getElementById("formStore").value;
+
+
 const item={
 
 id:Date.now().toString(),
@@ -1664,34 +1875,47 @@ id:Date.now().toString(),
 name:name,
 
 icon:
-document.getElementById("formIcon").value.trim() || "📦",
+document.getElementById("formIcon")
+.value
+.trim()||"📦",
 
 category:
-document.getElementById("formCategory").value,
+document.getElementById("formCategory")
+.value,
 
 unit:
-document.getElementById("formUnit").value,
+document.getElementById("formUnit")
+.value,
 
 quantity:
-Number(document.getElementById("formQuantity").value)||0,
+Number(
+document.getElementById("formQuantity").value
+)||0,
 
 minimum:
-Number(document.getElementById("formMinimum").value)||0,
+Number(
+document.getElementById("formMinimum").value
+)||0,
 
 price:
-Number(document.getElementById("formPrice").value)||0,
+Number(
+document.getElementById("formPrice").value
+)||0,
 
 store:
-document.getElementById("formStore").value.trim(),
+storeValue==="__NEW_STORE__"
+?""
+:storeValue,
 
 lastBought:
 document.getElementById("formLastBought").value,
 
 notes:
-document.getElementById("formNotes").value.trim(),
+document.getElementById("formNotes")
+.value
+.trim(),
 
-createdAt:
-today()
+createdAt:today()
 
 };
 
@@ -1702,7 +1926,7 @@ saveData();
 
 closeModal();
 
-toast("物品已加入 ✓");
+toast("物品已新增 ✓");
 
 renderAll();
 
@@ -1710,12 +1934,12 @@ renderAll();
 
 
 /* =========================================
-   修改物品
+   EDIT ITEM
 ========================================= */
 
 function editItem(id){
 
-const item =
+const item=
 data.items.find(i=>i.id===id);
 
 if(!item) return;
@@ -1797,7 +2021,7 @@ value="${item.quantity}">
 
 <div>
 
-<label>最低庫存數量</label>
+<label>最低存量</label>
 
 <input
 id="editMinimum"
@@ -1828,11 +2052,15 @@ value="${item.price}">
 
 <div>
 
-<label>常用商店</label>
+<label>通常在哪裡買？</label>
 
-<input
+<select
 id="editStore"
-value="${escapeHtml(item.store || "")}">
+onchange="handleStoreSelect('editStore')">
+
+${storeOptions(item.store||"")}
+
+</select>
 
 </div>
 
@@ -1844,27 +2072,31 @@ value="${escapeHtml(item.store || "")}">
 <input
 id="editLastBought"
 type="date"
-value="${item.lastBought || ""}">
+value="${item.lastBought||""}">
 
 
 <label>備註</label>
 
 <input
 id="editNotes"
-value="${escapeHtml(item.notes || "")}">
+value="${escapeHtml(item.notes||"")}">
 
 
 <button
 class="primary-button"
 onclick="saveEditItem('${item.id}')">
+
 儲存修改
+
 </button>
 
 
 <button
 class="cancel-button"
 onclick="closeModal()">
+
 取消
+
 </button>
 
 `);
@@ -1873,19 +2105,21 @@ onclick="closeModal()">
 
 
 /* =========================================
-   儲存修改
+   SAVE EDIT
 ========================================= */
 
 function saveEditItem(id){
 
-const item =
+const item=
 data.items.find(i=>i.id===id);
 
 if(!item) return;
 
 
-const name =
-document.getElementById("editName").value.trim();
+const name=
+document.getElementById("editName")
+.value
+.trim();
 
 if(!name){
 
@@ -1899,38 +2133,51 @@ return;
 item.name=name;
 
 item.icon=
-document.getElementById("editIcon").value.trim() || "📦";
+document.getElementById("editIcon")
+.value
+.trim()||"📦";
 
 item.category=
-document.getElementById("editCategory").value;
+document.getElementById("editCategory")
+.value;
 
 item.unit=
-document.getElementById("editUnit").value;
+document.getElementById("editUnit")
+.value;
 
 item.quantity=
-Number(document.getElementById("editQuantity").value)||0;
+Number(
+document.getElementById("editQuantity").value
+)||0;
 
 item.minimum=
-Number(document.getElementById("editMinimum").value)||0;
+Number(
+document.getElementById("editMinimum").value
+)||0;
 
 item.price=
-Number(document.getElementById("editPrice").value)||0;
+Number(
+document.getElementById("editPrice").value
+)||0;
 
 item.store=
-document.getElementById("editStore").value.trim();
+document.getElementById("editStore").value;
 
 item.lastBought=
-document.getElementById("editLastBought").value;
+document.getElementById("editLastBought")
+.value;
 
 item.notes=
-document.getElementById("editNotes").value.trim();
+document.getElementById("editNotes")
+.value
+.trim();
 
 
 saveData();
 
 closeModal();
 
-toast("已更新 ✓");
+toast("修改已儲存 ✓");
 
 renderAll();
 
@@ -1938,12 +2185,12 @@ renderAll();
 
 
 /* =========================================
-   刪除物品
+   DELETE ITEM
 ========================================= */
 
 function deleteItem(id){
 
-const item =
+const item=
 data.items.find(i=>i.id===id);
 
 if(!item) return;
@@ -1954,11 +2201,13 @@ if(
 `確定要刪除「${item.name}」嗎？`
 )
 ){
+
 return;
+
 }
 
 
-data.items =
+data.items=
 data.items.filter(
 i=>i.id!==id
 );
@@ -1966,7 +2215,7 @@ i=>i.id!==id
 
 saveData();
 
-toast("已刪除");
+toast("物品已刪除");
 
 renderAll();
 
@@ -1974,21 +2223,21 @@ renderAll();
 
 
 /* =========================================
-   數量
+   QUANTITY
 ========================================= */
 
 function changeQuantity(id,amount){
 
-const item =
+const item=
 data.items.find(i=>i.id===id);
 
 if(!item) return;
 
 
-item.quantity =
+item.quantity=
 Math.max(
 0,
-item.quantity + amount
+item.quantity+amount
 );
 
 
@@ -2000,30 +2249,32 @@ renderAll();
 
 
 /* =========================================
-   庫存狀態
+   STATUS
 ========================================= */
 
 function getStatus(item){
 
 if(item.quantity<=0){
 
-return {
+return{
 class:"out",
-text:"🔴 缺貨"
+text:"🔴 已用完"
 };
 
 }
 
+
 if(item.quantity<=item.minimum){
 
-return {
+return{
 class:"low",
 text:"⚠️ 需要補貨"
 };
 
 }
 
-return {
+
+return{
 class:"ok",
 text:"🟢 庫存充足"
 };
@@ -2032,20 +2283,21 @@ text:"🟢 庫存充足"
 
 
 /* =========================================
-   庫存
+   INVENTORY
 ========================================= */
 
 function renderInventory(){
 
-const list =
+const list=
 document.getElementById("inventoryList");
 
 if(!list) return;
 
 
-const search =
+const search=
 (
-document.getElementById("searchInput")?.value || ""
+document.getElementById("searchInput")
+?.value||""
 )
 .toLowerCase()
 .trim();
@@ -2054,13 +2306,14 @@ document.getElementById("searchInput")?.value || ""
 renderCategories();
 
 
-let items =
-[...data.items];
+let items=[...data.items];
 
 
-if(selectedCategory!=="All"){
+if(
+selectedCategory!=="全部"
+){
 
-items =
+items=
 items.filter(
 i=>i.category===selectedCategory
 );
@@ -2070,11 +2323,25 @@ i=>i.category===selectedCategory
 
 if(search){
 
-items =
+items=
 items.filter(i=>
-i.name.toLowerCase().includes(search) ||
-i.category.toLowerCase().includes(search) ||
-(i.store||"").toLowerCase().includes(search)
+
+i.name
+.toLowerCase()
+.includes(search)
+
+||
+
+i.category
+.toLowerCase()
+.includes(search)
+
+||
+
+(i.store||"")
+.toLowerCase()
+.includes(search)
+
 );
 
 }
@@ -2082,35 +2349,53 @@ i.category.toLowerCase().includes(search) ||
 
 items.sort((a,b)=>{
 
-const sa =
-getStatus(a);
+const sa=getStatus(a);
+const sb=getStatus(b);
 
-const sb =
-getStatus(b);
 
-if(sa.class==="out" && sb.class!=="out")
+if(
+sa.class==="out" &&
+sb.class!=="out"
+)
 return -1;
 
-if(sa.class!=="out" && sb.class==="out")
+
+if(
+sa.class!=="out" &&
+sb.class==="out"
+)
 return 1;
 
-if(sa.class==="low" && sb.class==="ok")
+
+if(
+sa.class==="low" &&
+sb.class==="ok"
+)
 return -1;
 
-if(sa.class==="ok" && sb.class==="low")
+
+if(
+sa.class==="ok" &&
+sb.class==="low"
+)
 return 1;
 
-return a.name.localeCompare(b.name);
+
+return a.name.localeCompare(
+b.name,
+"zh-HK"
+);
 
 });
 
 
 if(items.length===0){
 
-list.innerHTML=emptyState(
+list.innerHTML=
+emptyState(
 "📦",
-"搵唔到物品",
-"新增第一件家居物品，開始記錄你嘅庫存。"
+"暫時沒有物品",
+"新增第一件家居物品，就可以開始記錄庫存。"
 );
 
 return;
@@ -2118,20 +2403,21 @@ return;
 }
 
 
-list.innerHTML =
-items.map(item=>itemHTML(item)).join("");
+list.innerHTML=
+items
+.map(item=>itemHTML(item))
+.join("");
 
 }
 
 
 /* =========================================
-   物品 HTML
+   ITEM HTML
 ========================================= */
 
 function itemHTML(item){
 
-const status =
-getStatus(item);
+const status=getStatus(item);
 
 
 return `
@@ -2152,7 +2438,7 @@ ${escapeHtml(item.name)}
 </div>
 
 <div class="item-category">
-${categoryLabel(item.category)}
+${escapeHtml(item.category)}
 </div>
 
 <div class="status ${status.class}">
@@ -2169,7 +2455,7 @@ ${item.quantity}
 </div>
 
 <div class="qty-unit">
-${unitLabel(item.unit)}
+${escapeHtml(item.unit)}
 </div>
 
 </div>
@@ -2180,11 +2466,11 @@ ${unitLabel(item.unit)}
 <div class="item-info">
 
 <div class="info-chip">
-💰 $${money(item.price)} / ${unitLabel(item.unit)}
+💰 $${money(item.price)} / ${escapeHtml(item.unit)}
 </div>
 
 <div class="info-chip">
-🏪 ${escapeHtml(item.store || "未記錄商店")}
+🏪 ${escapeHtml(item.store||"未設定")}
 </div>
 
 <div class="info-chip">
@@ -2202,17 +2488,20 @@ onclick="changeQuantity('${item.id}',-1)">
 − 1
 </button>
 
+
 <button
 class="small-button primary"
 onclick="changeQuantity('${item.id}',1)">
-+ 1
+＋ 1
 </button>
+
 
 <button
 class="small-button"
 onclick="editItem('${item.id}')">
 ✏️ 修改
 </button>
+
 
 <button
 class="small-button danger"
@@ -2230,37 +2519,42 @@ onclick="deleteItem('${item.id}')">
 
 
 /* =========================================
-   分類
+   CATEGORIES
 ========================================= */
 
 function renderCategories(){
 
-const container =
-document.getElementById("categoryButtons");
+const container=
+document.getElementById(
+"categoryButtons"
+);
 
 if(!container) return;
 
 
 const categories=[
-"All",
-"Kitchen",
-"Bathroom",
-"Cleaning",
-"Pantry",
-"Personal Care",
-"Pet",
-"Other"
+"全部",
+"廚房",
+"浴室",
+"清潔",
+"食品儲藏",
+"個人護理",
+"寵物",
+"其他"
 ];
 
 
-container.innerHTML =
+container.innerHTML=
 categories.map(category=>`
 
 <button
-class="category-btn ${selectedCategory===category?"active":""}"
+class="category-btn ${
+selectedCategory===category
+?"active":""
+}"
 onclick="selectCategory('${category}')">
 
-${categoryLabel(category)}
+${category}
 
 </button>
 
@@ -2279,61 +2573,76 @@ renderInventory();
 
 
 /* =========================================
-   首頁
+   HOME
 ========================================= */
 
 function renderHome(){
 
-const total =
+const total=
 data.items.length;
 
-const low =
+
+const low=
 data.items.filter(
 i=>i.quantity<=i.minimum
 ).length;
 
-const shopping =
+
+const shopping=
 data.shopping.filter(
 i=>!i.done
 ).length;
 
-const value =
+
+const value=
 data.items.reduce(
-(sum,i)=>sum+(i.quantity*i.price),
+(sum,i)=>
+sum+(i.quantity*i.price),
 0
 );
 
 
-document.getElementById("homeTotal")
-.textContent=total;
-
-document.getElementById("homeLow")
-.textContent=low;
-
-document.getElementById("homeShopping")
-.textContent=shopping;
-
-document.getElementById("homeValue")
-.textContent="$"+money(value);
+document.getElementById(
+"homeTotal"
+).textContent=total;
 
 
-const lowItems =
+document.getElementById(
+"homeLow"
+).textContent=low;
+
+
+document.getElementById(
+"homeShopping"
+).textContent=shopping;
+
+
+document.getElementById(
+"homeValue"
+).textContent=
+"$"+money(value);
+
+
+const lowItems=
 data.items
 .filter(i=>i.quantity<=i.minimum)
 .sort((a,b)=>a.quantity-b.quantity)
 .slice(0,5);
 
 
-const container =
-document.getElementById("homeLowList");
+const container=
+document.getElementById(
+"homeLowList"
+);
 
 
 if(lowItems.length===0){
 
-container.innerHTML=emptyState(
+container.innerHTML=
+emptyState(
 "🎉",
-"目前一切正常！",
-"暫時冇物品需要補貨。"
+"全部都足夠！",
+"目前沒有需要補貨嘅物品。"
 );
 
 return;
@@ -2341,7 +2650,7 @@ return;
 }
 
 
-container.innerHTML =
+container.innerHTML=
 lowItems
 .map(item=>itemHTML(item))
 .join("");
@@ -2350,30 +2659,37 @@ lowItems
 
 
 /* =========================================
-   購物清單
+   SHOPPING
 ========================================= */
 
 function renderShopping(){
 
-const list =
-document.getElementById("shoppingList");
+const list=
+document.getElementById(
+"shoppingList"
+);
 
-const active =
+
+const active=
 data.shopping.filter(
 i=>!i.done
 );
 
-document.getElementById("shoppingCount")
-.textContent =
-active.length + " 項";
+
+document.getElementById(
+"shoppingCount"
+)
+.textContent=
+active.length+" 件";
 
 
 if(active.length===0){
 
-list.innerHTML=emptyState(
+list.innerHTML=
+emptyState(
 "🛒",
 "購物清單暫時係空嘅",
-"需要補貨嘅物品可以加喺呢度。"
+"可以將需要買嘅嘢加入清單。"
 );
 
 return;
@@ -2381,7 +2697,7 @@ return;
 }
 
 
-list.innerHTML =
+list.innerHTML=
 active.map(item=>`
 
 <div class="shopping-row">
@@ -2391,6 +2707,7 @@ class="check"
 onclick="completeShopping('${item.id}')">
 </button>
 
+
 <div class="shopping-name">
 
 <strong>
@@ -2398,11 +2715,17 @@ ${escapeHtml(item.name)}
 </strong>
 
 <small>
-${escapeHtml(item.quantity || "")}
-${item.store ? " • "+escapeHtml(item.store):""}
+
+${escapeHtml(item.quantity||"")}
+
+${item.store
+?" • 🏪 "+escapeHtml(item.store)
+:""}
+
 </small>
 
 </div>
+
 
 <button
 class="small-button danger"
@@ -2419,7 +2742,7 @@ onclick="deleteShopping('${item.id}')">
 
 
 /* =========================================
-   新增購物項目
+   ADD SHOPPING
 ========================================= */
 
 function openAddShopping(){
@@ -2428,7 +2751,7 @@ openModal(`
 
 <div class="modal-header">
 
-<h2>🛒 新增購物項目</h2>
+<h2>🛒 加入購物清單</h2>
 
 <button
 class="close"
@@ -2446,24 +2769,30 @@ id="shoppingName"
 placeholder="例如：廁紙">
 
 
-<label>數量／備註</label>
+<label>數量 / 備註</label>
 
 <input
 id="shoppingQuantity"
 placeholder="例如：2包">
 
 
-<label>常用商店</label>
+<label>去邊間買？</label>
 
-<input
+<select
 id="shoppingStore"
-placeholder="例如：Costco">
+onchange="handleStoreSelect('shoppingStore')">
+
+${storeOptions()}
+
+</select>
 
 
 <button
 class="primary-button"
 onclick="saveShopping()">
+
 加入清單
+
 </button>
 
 `);
@@ -2471,12 +2800,18 @@ onclick="saveShopping()">
 }
 
 
+/* =========================================
+   SAVE SHOPPING
+========================================= */
+
 function saveShopping(){
 
-const name =
+const name=
 document
 .getElementById("shoppingName")
-.value.trim();
+.value
+.trim();
+
 
 if(!name){
 
@@ -2485,6 +2820,12 @@ alert("請輸入物品名稱。");
 return;
 
 }
+
+
+const store=
+document
+.getElementById("shoppingStore")
+.value;
 
 
 data.shopping.push({
@@ -2496,12 +2837,13 @@ name:name,
 quantity:
 document
 .getElementById("shoppingQuantity")
-.value.trim(),
+.value
+.trim(),
 
 store:
-document
-.getElementById("shoppingStore")
-.value.trim(),
+store==="__NEW_STORE__"
+?""
+:store,
 
 done:false,
 
@@ -2522,12 +2864,12 @@ renderAll();
 
 
 /* =========================================
-   完成購物
+   COMPLETE SHOPPING
 ========================================= */
 
 function completeShopping(id){
 
-const shopping =
+const shopping=
 data.shopping.find(
 i=>i.id===id
 );
@@ -2535,7 +2877,7 @@ i=>i.id===id
 if(!shopping) return;
 
 
-const existing =
+const existing=
 data.items.find(
 i=>
 i.name.toLowerCase()===
@@ -2549,7 +2891,7 @@ openModal(`
 
 <div class="modal-header">
 
-<h2>🛒 買咗！</h2>
+<h2>🛒 買咗喇！</h2>
 
 <button
 class="close"
@@ -2559,14 +2901,21 @@ onclick="closeModal()">
 
 </div>
 
-<p style="color:var(--muted);margin-bottom:15px">
 
-${escapeHtml(shopping.name)}
-已經存在於你嘅庫存。
+<p
+style="
+color:var(--muted);
+margin-bottom:15px;
+line-height:1.5;
+">
+
+「${escapeHtml(shopping.name)}」
+已經存在於庫存。
 
 </p>
 
-<label>買咗幾多？</label>
+
+<label>今次買咗幾多？</label>
 
 <input
 id="boughtQuantity"
@@ -2582,13 +2931,30 @@ id="boughtPrice"
 type="number"
 min="0"
 step="0.01"
-value="${existing.price || 0}">
+value="${existing.price||0}">
+
+
+<label>邊間店買？</label>
+
+<select
+id="boughtStore"
+onchange="handleStoreSelect('boughtStore')">
+
+${storeOptions(
+existing.store||
+shopping.store||
+""
+)}
+
+</select>
 
 
 <button
 class="primary-button"
 onclick="finishPurchase('${id}','${existing.id}')">
+
 加入庫存
+
 </button>
 
 `);
@@ -2612,7 +2978,8 @@ onclick="closeModal()">
 
 </div>
 
-<label>買咗幾多？</label>
+
+<label>今次買咗幾多？</label>
 
 <input
 id="boughtQuantity"
@@ -2635,13 +3002,26 @@ value="0">
 
 <select id="boughtCategory">
 
-<option value="Kitchen">廚房</option>
-<option value="Bathroom">浴室</option>
-<option value="Cleaning">清潔用品</option>
-<option value="Pantry">食品儲藏</option>
-<option value="Personal Care">個人護理</option>
-<option value="Pet">寵物用品</option>
-<option value="Other">其他</option>
+<option>廚房</option>
+<option>浴室</option>
+<option>清潔</option>
+<option>食品儲藏</option>
+<option>個人護理</option>
+<option>寵物</option>
+<option>其他</option>
+
+</select>
+
+
+<label>邊間店買？</label>
+
+<select
+id="boughtStore"
+onchange="handleStoreSelect('boughtStore')">
+
+${storeOptions(
+shopping.store||""
+)}
 
 </select>
 
@@ -2649,7 +3029,9 @@ value="0">
 <button
 class="primary-button"
 onclick="finishNewPurchase('${id}')">
+
 加入庫存
+
 </button>
 
 `);
@@ -2658,40 +3040,59 @@ onclick="finishNewPurchase('${id}')">
 
 
 /* =========================================
-   完成現有物品購買
+   FINISH EXISTING
 ========================================= */
 
-function finishPurchase(shoppingId,itemId){
+function finishPurchase(
+shoppingId,
+itemId
+){
 
-const shopping =
+const shopping=
 data.shopping.find(
 i=>i.id===shoppingId
 );
 
-const item =
+const item=
 data.items.find(
 i=>i.id===itemId
 );
 
-if(!shopping || !item) return;
+if(!shopping||!item) return;
 
 
-const qty =
+const qty=
 Number(
-document.getElementById("boughtQuantity").value
+document.getElementById(
+"boughtQuantity"
+).value
 )||1;
 
-const price =
+
+const price=
 Number(
-document.getElementById("boughtPrice").value
+document.getElementById(
+"boughtPrice"
+).value
 )||0;
 
 
-item.quantity += qty;
+const store=
+document.getElementById(
+"boughtStore"
+).value;
 
-item.price = price;
 
-item.lastBought = today();
+item.quantity+=qty;
+
+item.price=price;
+
+item.lastBought=today();
+
+item.store=
+store==="__NEW_STORE__"
+?item.store
+:store;
 
 
 data.purchases.push({
@@ -2708,12 +3109,12 @@ price:price,
 
 date:today(),
 
-store:item.store || shopping.store || ""
+store:item.store||""
 
 });
 
 
-data.shopping =
+data.shopping=
 data.shopping.filter(
 i=>i.id!==shoppingId
 );
@@ -2731,12 +3132,14 @@ renderAll();
 
 
 /* =========================================
-   完成新物品購買
+   FINISH NEW
 ========================================= */
 
-function finishNewPurchase(shoppingId){
+function finishNewPurchase(
+shoppingId
+){
 
-const shopping =
+const shopping=
 data.shopping.find(
 i=>i.id===shoppingId
 );
@@ -2744,18 +3147,32 @@ i=>i.id===shoppingId
 if(!shopping) return;
 
 
-const qty =
+const qty=
 Number(
-document.getElementById("boughtQuantity").value
+document.getElementById(
+"boughtQuantity"
+).value
 )||1;
 
-const price =
+
+const price=
 Number(
-document.getElementById("boughtPrice").value
+document.getElementById(
+"boughtPrice"
+).value
 )||0;
 
-const category =
-document.getElementById("boughtCategory").value;
+
+const category=
+document.getElementById(
+"boughtCategory"
+).value;
+
+
+const store=
+document.getElementById(
+"boughtStore"
+).value;
 
 
 const item={
@@ -2768,7 +3185,7 @@ icon:"📦",
 
 category:category,
 
-unit:"pcs",
+unit:"件",
 
 quantity:qty,
 
@@ -2776,7 +3193,10 @@ minimum:1,
 
 price:price,
 
-store:shopping.store || "",
+store:
+store==="__NEW_STORE__"
+?""
+:store,
 
 lastBought:today(),
 
@@ -2809,7 +3229,7 @@ store:item.store
 });
 
 
-data.shopping =
+data.shopping=
 data.shopping.filter(
 i=>i.id!==shoppingId
 );
@@ -2827,17 +3247,19 @@ renderAll();
 
 
 /* =========================================
-   刪除購物項目
+   DELETE SHOPPING
 ========================================= */
 
 function deleteShopping(id){
 
-data.shopping =
+data.shopping=
 data.shopping.filter(
 i=>i.id!==id
 );
 
 saveData();
+
+toast("已刪除");
 
 renderAll();
 
@@ -2845,10 +3267,12 @@ renderAll();
 
 
 /* =========================================
-   日曆
+   CALENDAR
 ========================================= */
 
-function changeCalendarMonth(direction){
+function changeCalendarMonth(
+direction
+){
 
 calendarDate.setMonth(
 calendarDate.getMonth()+direction
@@ -2861,45 +3285,68 @@ renderCalendar();
 
 function renderCalendar(){
 
-const grid =
-document.getElementById("calendarGrid");
+const grid=
+document.getElementById(
+"calendarGrid"
+);
 
 if(!grid) return;
 
 
-const year =
+const year=
 calendarDate.getFullYear();
 
-const month =
+const month=
 calendarDate.getMonth();
 
 
 const monthNames=[
-"一月","二月","三月",
-"四月","五月","六月",
-"七月","八月","九月",
-"十月","十一月","十二月"
+"一月",
+"二月",
+"三月",
+"四月",
+"五月",
+"六月",
+"七月",
+"八月",
+"九月",
+"十月",
+"十一月",
+"十二月"
 ];
 
 
-document.getElementById("calendarTitle")
-.textContent =
+document.getElementById(
+"calendarTitle"
+)
+.textContent=
 year+"年"+monthNames[month];
 
 
-const first =
-new Date(year,month,1)
-.getDay();
+const first=
+new Date(
+year,
+month,
+1
+).getDay();
 
-const days =
-new Date(year,month+1,0)
-.getDate();
+
+const days=
+new Date(
+year,
+month+1,
+0
+).getDate();
 
 
 let html="";
 
 
-for(let i=0;i<first;i++){
+for(
+let i=0;
+i<first;
+i++
+){
 
 html+=`
 <div class="calendar-day empty-day"></div>
@@ -2908,21 +3355,29 @@ html+=`
 }
 
 
-for(let day=1;day<=days;day++){
+for(
+let day=1;
+day<=days;
+day++
+){
 
-const date =
+const date=
 formatISO(
-new Date(year,month,day)
+new Date(
+year,
+month,
+day
+)
 );
 
 
-const purchases =
+const purchases=
 data.purchases.filter(
 p=>p.date===date
 );
 
 
-const isToday =
+const isToday=
 date===today();
 
 
@@ -2931,22 +3386,26 @@ let icons="";
 
 if(purchases.length){
 
-const unique =
-[...new Set(
+const unique=
+[
+...new Set(
 purchases.map(p=>{
 
-const item =
+const item=
 data.items.find(
 i=>i.id===p.itemId
 );
 
-return item ? item.icon : "📦";
+return item
+?item.icon
+:"📦";
 
 })
-)];
+)
+];
 
 
-icons =
+icons=
 unique
 .slice(0,3)
 .join(" ");
@@ -2957,7 +3416,9 @@ unique
 html+=`
 
 <div
-class="calendar-day ${isToday?"today":""}"
+class="calendar-day ${
+isToday?"today":""
+}"
 onclick="openCalendarDay('${date}')">
 
 <div class="calendar-number">
@@ -2968,13 +3429,17 @@ ${day}
 ${icons}
 </div>
 
-${purchases.length
+${
+purchases.length
 ?
-`<div class="calendar-dots">
+`
+<div class="calendar-dots">
 <div class="dot"></div>
 <div class="dot"></div>
-</div>`
-:""}
+</div>
+`
+:""
+}
 
 </div>
 
@@ -2991,12 +3456,12 @@ renderTimeline();
 
 
 /* =========================================
-   日曆日期
+   CALENDAR DAY
 ========================================= */
 
 function openCalendarDay(date){
 
-const purchases =
+const purchases=
 data.purchases.filter(
 p=>p.date===date
 );
@@ -3023,13 +3488,14 @@ if(purchases.length===0){
 
 html+=emptyState(
 "📭",
-"冇購買記錄",
-"呢日冇任何購買記錄。"
+"沒有購買記錄",
+"呢日暫時冇記錄任何購買。"
 );
 
 }else{
 
-html+=purchases.map(p=>`
+html+=purchases
+.map(p=>`
 
 <div class="timeline-entry">
 
@@ -3044,15 +3510,23 @@ ${escapeHtml(p.itemName)}
 </strong>
 
 <small>
-+${p.quantity} • $${money(p.price)}
-${p.store ? " • "+escapeHtml(p.store):""}
+
+＋${p.quantity}
+
+• $${money(p.price)}
+
+${p.store
+?" • 🏪 "+escapeHtml(p.store)
+:""}
+
 </small>
 
 </div>
 
 </div>
 
-`).join("");
+`)
+.join("");
 
 }
 
@@ -3063,31 +3537,35 @@ openModal(html);
 
 
 /* =========================================
-   時間線
+   TIMELINE
 ========================================= */
 
 function renderTimeline(){
 
-const container =
-document.getElementById("timeline");
+const container=
+document.getElementById(
+"timeline"
+);
 
 if(!container) return;
 
 
-const sorted =
+const sorted=
 [...data.purchases]
 .sort(
 (a,b)=>
-new Date(b.date)-new Date(a.date)
+new Date(b.date)-
+new Date(a.date)
 );
 
 
 if(sorted.length===0){
 
-container.innerHTML=emptyState(
+container.innerHTML=
+emptyState(
 "📅",
-"暫時冇購買記錄",
-"你嘅購買記錄會喺呢度顯示。"
+"暫時沒有購買記錄",
+"之後嘅購買記錄會顯示喺呢度。"
 );
 
 return;
@@ -3109,21 +3587,26 @@ groups[p.date].push(p);
 });
 
 
-container.innerHTML =
+container.innerHTML=
 Object.keys(groups)
 .map(date=>`
 
 <div class="timeline-date">
+
 ${formatDate(date)}
+
 </div>
 
-${groups[date].map(p=>`
+
+${groups[date]
+.map(p=>`
 
 <div class="timeline-entry">
 
 <div class="timeline-entry-icon">
 📦
 </div>
+
 
 <div class="timeline-entry-main">
 
@@ -3132,29 +3615,37 @@ ${escapeHtml(p.itemName)}
 </strong>
 
 <small>
-+${p.quantity}
-${p.store ? " • "+escapeHtml(p.store):""}
+
+＋${p.quantity}
+
+${p.store
+?" • 🏪 "+escapeHtml(p.store)
+:""}
+
 • $${money(p.price)}
+
 </small>
 
 </div>
 
 </div>
 
-`).join("")}
+`)
+.join("")}
 
-`).join("");
+`)
+.join("");
 
 }
 
 
 /* =========================================
-   統計
+   STATS
 ========================================= */
 
 function renderStats(){
 
-const value =
+const value=
 data.items.reduce(
 (sum,i)=>
 sum+(i.quantity*i.price),
@@ -3162,21 +3653,24 @@ sum+(i.quantity*i.price),
 );
 
 
-document.getElementById("statsValue")
-.textContent="$"+money(value);
+document.getElementById(
+"statsValue"
+)
+.textContent=
+"$"+money(value);
 
 
 const categories={
-Kitchen:0,
-Bathroom:0,
-Cleaning:0,
-Other:0
+廚房:0,
+浴室:0,
+清潔:0,
+其他:0
 };
 
 
 data.items.forEach(item=>{
 
-const v =
+const v=
 item.quantity*item.price;
 
 
@@ -3188,24 +3682,39 @@ categories[item.category]+=v;
 
 }else{
 
-categories.Other+=v;
+categories.其他+=v;
 
 }
 
 });
 
 
-document.getElementById("kitchenValue")
-.textContent="$"+money(categories.Kitchen);
+document.getElementById(
+"kitchenValue"
+)
+.textContent=
+"$"+money(categories.廚房);
 
-document.getElementById("bathroomValue")
-.textContent="$"+money(categories.Bathroom);
 
-document.getElementById("cleaningValue")
-.textContent="$"+money(categories.Cleaning);
+document.getElementById(
+"bathroomValue"
+)
+.textContent=
+"$"+money(categories.浴室);
 
-document.getElementById("otherValue")
-.textContent="$"+money(categories.Other);
+
+document.getElementById(
+"cleaningValue"
+)
+.textContent=
+"$"+money(categories.清潔);
+
+
+document.getElementById(
+"otherValue"
+)
+.textContent=
+"$"+money(categories.其他);
 
 
 renderMonthlyStats();
@@ -3214,13 +3723,15 @@ renderMonthlyStats();
 
 
 /* =========================================
-   每月統計
+   MONTHLY STATS
 ========================================= */
 
 function renderMonthlyStats(){
 
-const container =
-document.getElementById("monthlyStats");
+const container=
+document.getElementById(
+"monthlyStats"
+);
 
 if(!container) return;
 
@@ -3230,7 +3741,7 @@ const months={};
 
 data.purchases.forEach(p=>{
 
-const month =
+const month=
 p.date.substring(0,7);
 
 
@@ -3245,7 +3756,7 @@ p.quantity*p.price;
 });
 
 
-const keys =
+const keys=
 Object.keys(months)
 .sort()
 .reverse()
@@ -3254,10 +3765,11 @@ Object.keys(months)
 
 if(keys.length===0){
 
-container.innerHTML=emptyState(
+container.innerHTML=
+emptyState(
 "💰",
-"暫時冇購買資料",
-"每月購買支出會喺呢度顯示。"
+"暫時沒有購買數據",
+"之後嘅每月消費會顯示喺呢度。"
 );
 
 return;
@@ -3265,7 +3777,7 @@ return;
 }
 
 
-container.innerHTML =
+container.innerHTML=
 keys.map(month=>`
 
 <div class="month-summary">
@@ -3286,7 +3798,7 @@ $${money(months[month])}
 
 
 /* =========================================
-   設定
+   SETTINGS
 ========================================= */
 
 function openSettings(){
@@ -3310,32 +3822,84 @@ onclick="closeModal()">
 style="box-shadow:none;padding:0">
 
 <h3 style="margin-bottom:8px">
-💾 備份
+🏪 常用商店
 </h3>
+
 
 <p
 style="
 color:var(--muted);
 font-size:13px;
 line-height:1.5;
-margin-bottom:12px;">
+margin-bottom:12px;
+">
 
-下載你嘅庫存、購物清單及購買記錄備份。
+將你成日去買嘢嘅商店儲存落嚟。
+之後新增物品時就可以直接揀，
+唔使次次重新輸入。
 
 </p>
+
+
+<div id="storeManager">
+
+${renderStoreManagerHTML()}
+
+</div>
+
+
+<button
+class="primary-button"
+onclick="addStoreFromSettings()">
+
+＋ 新增商店
+
+</button>
+
+</div>
+
+
+<div class="card"
+style="
+box-shadow:none;
+padding:0;
+margin-top:15px;
+">
+
+<h3 style="margin-bottom:8px">
+💾 備份資料
+</h3>
+
+
+<p
+style="
+color:var(--muted);
+font-size:13px;
+line-height:1.5;
+margin-bottom:12px;
+">
+
+可以將庫存、購物清單、購買記錄及商店清單備份落手機。
+
+</p>
+
 
 <button
 class="primary-button"
 onclick="exportBackup()">
+
 📤 匯出備份
+
 </button>
+
 
 <label
 class="primary-button"
 style="
 display:block;
 text-align:center;
-cursor:pointer;">
+cursor:pointer;
+">
 
 📥 匯入備份
 
@@ -3351,16 +3915,23 @@ onchange="importBackup(event)">
 
 
 <div class="card"
-style="box-shadow:none;padding:0;margin-top:15px">
+style="
+box-shadow:none;
+padding:0;
+margin-top:15px;
+">
 
 <h3 style="margin-bottom:8px">
 🗑 資料
 </h3>
 
+
 <button
 class="small-button danger"
 onclick="clearAllData()">
+
 刪除所有資料
+
 </button>
 
 </div>
@@ -3371,12 +3942,140 @@ onclick="clearAllData()">
 
 
 /* =========================================
-   深色模式
+   STORE MANAGER
+========================================= */
+
+function renderStoreManagerHTML(){
+
+if(data.settings.stores.length===0){
+
+return `
+
+<div class="empty"
+style="padding:20px">
+
+<div class="empty-icon">
+🏪
+</div>
+
+<div>
+暫時未有儲存商店
+</div>
+
+</div>
+
+`;
+
+}
+
+
+return data.settings.stores
+.map(store=>`
+
+<div class="store-row">
+
+<div class="store-name">
+🏪 ${escapeHtml(store)}
+</div>
+
+
+<button
+class="store-delete"
+onclick="deleteStore('${escapeHtml(store)}')">
+
+刪除
+
+</button>
+
+</div>
+
+`)
+.join("");
+
+}
+
+
+/* =========================================
+   ADD STORE
+========================================= */
+
+function addStoreFromSettings(){
+
+const name=
+prompt(
+"請輸入商店名稱："
+);
+
+
+if(!name) return;
+
+
+const clean=name.trim();
+
+if(!clean) return;
+
+
+if(
+data.settings.stores.includes(clean)
+){
+
+alert("呢間商店已經存在。");
+
+return;
+
+}
+
+
+data.settings.stores.push(clean);
+
+saveData();
+
+openSettings();
+
+toast("商店已加入 ✓");
+
+}
+
+
+/* =========================================
+   DELETE STORE
+========================================= */
+
+function deleteStore(store){
+
+if(
+!confirm(
+`確定要刪除「${store}」嗎？`
+)
+){
+
+return;
+
+}
+
+
+data.settings.stores=
+data.settings.stores.filter(
+s=>s!==store
+);
+
+
+saveData();
+
+openSettings();
+
+toast("商店已刪除");
+
+}
+
+
+/* =========================================
+   DARK MODE
 ========================================= */
 
 function toggleDarkMode(){
 
-data.settings.dark =
+data.settings.dark=
 !data.settings.dark;
 
 applyTheme();
@@ -3400,12 +4099,12 @@ applyTheme();
 
 
 /* =========================================
-   匯出備份
+   BACKUP EXPORT
 ========================================= */
 
 function exportBackup(){
 
-const json =
+const json=
 JSON.stringify(
 data,
 null,
@@ -3413,7 +4112,7 @@ null,
 );
 
 
-const blob =
+const blob=
 new Blob(
 [json],
 {
@@ -3422,19 +4121,20 @@ type:"application/json"
 );
 
 
-const url =
+const url=
 URL.createObjectURL(blob);
 
 
-const a =
+const a=
 document.createElement("a");
 
 a.href=url;
 
 a.download=
-"home-stock-backup-" +
-today() +
+"家居庫存備份-"+
+today()+
 ".json";
+
 
 a.click();
 
@@ -3446,18 +4146,18 @@ toast("備份已下載 ✓");
 
 
 /* =========================================
-   匯入備份
+   BACKUP IMPORT
 ========================================= */
 
 function importBackup(event){
 
-const file =
+const file=
 event.target.files[0];
 
 if(!file) return;
 
 
-const reader =
+const reader=
 new FileReader();
 
 
@@ -3465,8 +4165,10 @@ reader.onload=function(){
 
 try{
 
-const imported =
-JSON.parse(reader.result);
+const imported=
+JSON.parse(
+reader.result
+);
 
 
 if(
@@ -3482,7 +4184,7 @@ throw new Error();
 
 if(
 !confirm(
-"確定要匯入呢份備份嗎？目前資料會被取代。"
+"匯入呢份備份後，現有資料會被取代。確定嗎？"
 )
 ){
 
@@ -3492,6 +4194,26 @@ return;
 
 
 data=imported;
+
+
+if(!data.settings){
+data.settings={};
+}
+
+if(!Array.isArray(
+data.settings.stores
+)){
+
+data.settings.stores=[
+"Costco",
+"Walmart",
+"No Frills",
+"Dollarama",
+"Amazon"
+];
+
+}
+
 
 saveData();
 
@@ -3520,14 +4242,14 @@ reader.readAsText(file);
 
 
 /* =========================================
-   清除所有資料
+   CLEAR
 ========================================= */
 
 function clearAllData(){
 
 if(
 !confirm(
-"確定要刪除所有家居庫存資料嗎？此操作無法復原。"
+"確定要刪除所有 Home Stock 資料嗎？呢個動作無法復原。"
 )
 ){
 
@@ -3537,12 +4259,27 @@ return;
 
 
 data={
+
 items:[],
+
 shopping:[],
+
 purchases:[],
+
 settings:{
-dark:false
+
+dark:false,
+
+stores:[
+"Costco",
+"Walmart",
+"No Frills",
+"Dollarama",
+"Amazon"
+]
+
 }
+
 };
 
 
@@ -3558,30 +4295,37 @@ toast("所有資料已刪除");
 
 
 /* =========================================
-   輔助函數
+   HELPERS
 ========================================= */
 
 function today(){
 
-return formatISO(new Date());
+return formatISO(
+new Date()
+);
 
 }
 
 
 function formatISO(date){
 
-const y =
+const y=
 date.getFullYear();
 
-const m =
+
+const m=
 String(
 date.getMonth()+1
-).padStart(2,"0");
+)
+.padStart(2,"0");
 
-const d =
+
+const d=
 String(
 date.getDate()
-).padStart(2,"0");
+)
+.padStart(2,"0");
+
 
 return `${y}-${m}-${d}`;
 
@@ -3590,11 +4334,13 @@ return `${y}-${m}-${d}`;
 
 function formatDate(date){
 
-if(!date) return "未有記錄";
+if(!date)
+return "未記錄";
 
 
-const parts =
+const parts=
 date.split("-");
+
 
 if(parts.length!==3)
 return date;
@@ -3602,8 +4348,8 @@ return date;
 
 return (
 parts[0]+"年"+
-Number(parts[1])+"月"+
-Number(parts[2])+"日"
+parts[1]+"月"+
+parts[2]+"日"
 );
 
 }
@@ -3611,36 +4357,57 @@ Number(parts[2])+"日"
 
 function formatMonth(month){
 
-const parts =
+const parts=
 month.split("-");
 
-const year =
-Number(parts[0]);
 
-const monthNumber =
-Number(parts[1]);
+const date=
+new Date(
+Number(parts[0]),
+Number(parts[1])-1,
+1
+);
 
-const monthNames=[
-"一月","二月","三月",
-"四月","五月","六月",
-"七月","八月","九月",
-"十月","十一月","十二月"
+
+const names=[
+"一月",
+"二月",
+"三月",
+"四月",
+"五月",
+"六月",
+"七月",
+"八月",
+"九月",
+"十月",
+"十一月",
+"十二月"
 ];
 
-return year+"年"+monthNames[monthNumber-1];
+
+return (
+parts[0]+"年"+
+names[date.getMonth()]
+);
 
 }
 
 
 function money(number){
 
-return Number(number||0)
+return Number(
+number||0
+)
 .toFixed(2);
 
 }
 
 
-function emptyState(icon,title,text){
+function emptyState(
+icon,
+title,
+text
+){
 
 return `
 
@@ -3667,7 +4434,9 @@ ${text}
 
 function escapeHtml(value){
 
-return String(value ?? "")
+return String(
+value??""
+)
 .replace(/&/g,"&amp;")
 .replace(/</g,"&lt;")
 .replace(/>/g,"&gt;")
@@ -3677,157 +4446,60 @@ return String(value ?? "")
 }
 
 
-/* =========================================
-   分類中文名稱
-========================================= */
-
-function categoryLabel(category){
-
-const labels={
-
-All:"全部",
-
-Kitchen:"廚房",
-
-Bathroom:"浴室",
-
-Cleaning:"清潔用品",
-
-Pantry:"食品儲藏",
-
-"Personal Care":"個人護理",
-
-Pet:"寵物用品",
-
-Other:"其他"
-
-};
-
-return labels[category] || category;
-
-}
-
-
-/* =========================================
-   單位中文名稱
-========================================= */
-
-function unitLabel(unit){
-
-const labels={
-
-pcs:"件",
-
-rolls:"卷",
-
-cans:"罐",
-
-bottles:"支／樽",
-
-boxes:"盒",
-
-bags:"袋",
-
-packs:"包",
-
-kg:"公斤",
-
-L:"公升"
-
-};
-
-return labels[unit] || unit;
-
-}
-
-
-/* =========================================
-   分類選項
-========================================= */
-
-function categoryOptions(selected){
+function categoryOptions(
+selected
+){
 
 const list=[
-
-["Kitchen","廚房"],
-
-["Bathroom","浴室"],
-
-["Cleaning","清潔用品"],
-
-["Pantry","食品儲藏"],
-
-["Personal Care","個人護理"],
-
-["Pet","寵物用品"],
-
-["Other","其他"]
-
+"廚房",
+"浴室",
+"清潔",
+"食品儲藏",
+"個人護理",
+"寵物",
+"其他"
 ];
 
 
-return list.map(x=>
-`<option value="${x[0]}" ${x[0]===selected?"selected":""}>${x[1]}</option>`
-).join("");
+return list
+.map(x=>
+`<option ${
+x===selected
+?"selected":""
+}>${x}</option>`
+)
+.join("");
 
 }
 
 
-/* =========================================
-   單位選項
-========================================= */
-
-function unitOptions(selected){
+function unitOptions(
+selected
+){
 
 const list=[
-
-["pcs","件"],
-
-["rolls","卷"],
-
-["cans","罐"],
-
-["bottles","支／樽"],
-
-["boxes","盒"],
-
-["bags","袋"],
-
-["packs","包"],
-
-["kg","公斤"],
-
-["L","公升"]
-
+"件",
+"卷",
+"罐",
+"支",
+"盒",
+"包",
+"袋",
+"公斤",
+"公升"
 ];
 
 
-return list.map(x=>
-`<option value="${x[0]}" ${x[0]===selected?"selected":""}>${x[1]}</option>`
-).join("");
+return list
+.map(x=>
+`<option ${
+x===selected
+?"selected":""
+}>${x}</option>`
+)
+.join("");
 
 }
-
-
-/* =========================================
-   修正搜尋功能
-========================================= */
-
-document.addEventListener("DOMContentLoaded",function(){
-
-const search =
-document.getElementById("searchInput");
-
-if(search){
-
-search.addEventListener(
-"input",
-renderInventory
-);
-
-}
-
-});
 
 
 /* =========================================
@@ -3850,7 +4522,7 @@ renderStats();
 
 
 /* =========================================
-   開始
+   START
 ========================================= */
 
 renderAll();
