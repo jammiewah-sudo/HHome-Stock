@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-<title>Home Stock</title>
+<title>家居庫存</title>
 
 <meta name="theme-color" content="#f7f3ee">
 
@@ -54,7 +54,7 @@ body.dark{
 }
 
 body{
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI","Noto Sans TC",sans-serif;
     background:var(--bg);
     color:var(--text);
     min-height:100vh;
@@ -841,6 +841,7 @@ label{
     .calendar-day{
         min-height:54px;
     }
+
 }
 
 </style>
@@ -859,8 +860,8 @@ label{
 </div>
 
 <div>
-<h1>Home Stock</h1>
-<div class="subtitle">Know what you have. Buy only what you need.</div>
+<h1>家居庫存</h1>
+<div class="subtitle">清楚屋企有咩，唔使重複買嘢</div>
 </div>
 
 </div>
@@ -884,7 +885,7 @@ onclick="openSettings()">
 </header>
 
 
-<!-- HOME -->
+<!-- 首頁 -->
 
 <section
 id="home"
@@ -903,7 +904,7 @@ id="homeTotal">
 </div>
 
 <div class="stat-label">
-Total Items
+物品總數
 </div>
 
 </div>
@@ -919,7 +920,7 @@ id="homeLow">
 </div>
 
 <div class="stat-label">
-Need Restock
+需要補貨
 </div>
 
 </div>
@@ -935,7 +936,7 @@ id="homeShopping">
 </div>
 
 <div class="stat-label">
-Shopping List
+購物清單
 </div>
 
 </div>
@@ -951,7 +952,7 @@ $0
 </div>
 
 <div class="stat-label">
-Estimated Value
+估算庫存價值
 </div>
 
 </div>
@@ -961,7 +962,7 @@ Estimated Value
 
 <div class="section-title">
 
-<h2>Quick Actions</h2>
+<h2>快速操作</h2>
 
 </div>
 
@@ -976,11 +977,11 @@ onclick="openAddItem()">
 </div>
 
 <div class="quick-title">
-Add Item
+新增物品
 </div>
 
 <div class="quick-sub">
-Add something you keep at home
+加入屋企平時會儲備嘅物品
 </div>
 
 </button>
@@ -994,11 +995,11 @@ onclick="showPage('shopping')">
 </div>
 
 <div class="quick-title">
-Shopping List
+購物清單
 </div>
 
 <div class="quick-sub">
-See what needs buying
+睇下有咩需要買
 </div>
 
 </button>
@@ -1008,12 +1009,12 @@ See what needs buying
 
 <div class="section-title">
 
-<h2>⚠️ Need Restock</h2>
+<h2>⚠️ 需要補貨</h2>
 
 <span
 onclick="showPage('inventory')"
 style="cursor:pointer">
-See All →
+查看全部 →
 </span>
 
 </div>
@@ -1023,7 +1024,7 @@ See All →
 </section>
 
 
-<!-- INVENTORY -->
+<!-- 庫存 -->
 
 <section
 id="inventory"
@@ -1031,13 +1032,13 @@ class="page">
 
 <div class="section-title">
 
-<h2>📦 My Inventory</h2>
+<h2>📦 我的庫存</h2>
 
 <button
 class="small-button primary"
 style="flex:0;padding:9px 13px"
 onclick="openAddItem()">
-+ Add
+＋ 新增
 </button>
 
 </div>
@@ -1049,8 +1050,8 @@ onclick="openAddItem()">
 <input
 id="searchInput"
 type="search"
-placeholder="Search items..."
-oninput="renderInventory()">
+placeholder="搜尋物品..."
+oninput="renderInventory">
 
 </div>
 
@@ -1066,7 +1067,7 @@ id="categoryButtons">
 </section>
 
 
-<!-- SHOPPING -->
+<!-- 購物清單 -->
 
 <section
 id="shopping"
@@ -1074,10 +1075,10 @@ class="page">
 
 <div class="section-title">
 
-<h2>🛒 Shopping List</h2>
+<h2>🛒 購物清單</h2>
 
 <span id="shoppingCount">
-0 items
+0 項
 </span>
 
 </div>
@@ -1089,7 +1090,7 @@ class="page">
 <button
 class="primary-button"
 onclick="openAddShopping()">
-＋ Add to Shopping List
+＋ 加入購物清單
 </button>
 
 </div>
@@ -1097,7 +1098,7 @@ onclick="openAddShopping()">
 </section>
 
 
-<!-- CALENDAR -->
+<!-- 日曆 -->
 
 <section
 id="calendar"
@@ -1105,7 +1106,7 @@ class="page">
 
 <div class="section-title">
 
-<h2>📅 Purchase History</h2>
+<h2>📅 購買記錄</h2>
 
 </div>
 
@@ -1120,7 +1121,7 @@ class="page">
 <div
 class="calendar-title"
 id="calendarTitle">
-August 2026
+2026年8月
 </div>
 
 <button onclick="changeCalendarMonth(1)">
@@ -1131,13 +1132,13 @@ August 2026
 
 <div class="calendar-week">
 
-<div>Sun</div>
-<div>Mon</div>
-<div>Tue</div>
-<div>Wed</div>
-<div>Thu</div>
-<div>Fri</div>
-<div>Sat</div>
+<div>日</div>
+<div>一</div>
+<div>二</div>
+<div>三</div>
+<div>四</div>
+<div>五</div>
+<div>六</div>
 
 </div>
 
@@ -1151,7 +1152,7 @@ id="calendarGrid">
 
 <div class="section-title">
 
-<h2>🕒 Timeline</h2>
+<h2>🕒 時間線</h2>
 
 </div>
 
@@ -1160,7 +1161,7 @@ id="calendarGrid">
 </section>
 
 
-<!-- STATS -->
+<!-- 統計 -->
 
 <section
 id="stats"
@@ -1168,7 +1169,7 @@ class="page">
 
 <div class="section-title">
 
-<h2>📊 Statistics</h2>
+<h2>📊 統計</h2>
 
 </div>
 
@@ -1177,7 +1178,7 @@ class="page">
 <div class="total-box">
 
 <div class="total-label">
-Estimated Current Stock Value
+目前估算庫存價值
 </div>
 
 <div
@@ -1193,7 +1194,7 @@ class="breakdown-row">
 
 <div class="breakdown-left">
 <div class="breakdown-dot"></div>
-Kitchen
+廚房
 </div>
 
 <strong id="kitchenValue">$0</strong>
@@ -1205,7 +1206,7 @@ class="breakdown-row">
 
 <div class="breakdown-left">
 <div class="breakdown-dot"></div>
-Bathroom
+浴室
 </div>
 
 <strong id="bathroomValue">$0</strong>
@@ -1217,7 +1218,7 @@ class="breakdown-row">
 
 <div class="breakdown-left">
 <div class="breakdown-dot"></div>
-Cleaning
+清潔用品
 </div>
 
 <strong id="cleaningValue">$0</strong>
@@ -1229,7 +1230,7 @@ class="breakdown-row">
 
 <div class="breakdown-left">
 <div class="breakdown-dot"></div>
-Other
+其他
 </div>
 
 <strong id="otherValue">$0</strong>
@@ -1243,9 +1244,9 @@ Other
 
 <div class="section-title">
 
-<h2>📅 Purchase Spending</h2>
+<h2>📅 購買支出</h2>
 
-<span>By Month</span>
+<span>按月份</span>
 
 </div>
 
@@ -1256,7 +1257,7 @@ Other
 </section>
 
 
-<!-- BOTTOM NAV -->
+<!-- 底部導航 -->
 
 <nav class="bottom-nav">
 
@@ -1266,7 +1267,7 @@ data-page="home"
 onclick="showPage('home')">
 
 <span class="nav-icon">🏠</span>
-Home
+首頁
 
 </button>
 
@@ -1276,7 +1277,7 @@ data-page="inventory"
 onclick="showPage('inventory')">
 
 <span class="nav-icon">📦</span>
-Inventory
+庫存
 
 </button>
 
@@ -1286,7 +1287,7 @@ data-page="shopping"
 onclick="showPage('shopping')">
 
 <span class="nav-icon">🛒</span>
-Shopping
+購物
 
 </button>
 
@@ -1296,7 +1297,7 @@ data-page="stats"
 onclick="showPage('stats')">
 
 <span class="nav-icon">📊</span>
-Stats
+統計
 
 </button>
 
@@ -1305,7 +1306,7 @@ Stats
 </div>
 
 
-<!-- MODAL -->
+<!-- 彈出視窗 -->
 
 <div
 class="modal"
@@ -1325,7 +1326,7 @@ id="modal">
 <div
 class="toast"
 id="toast">
-Saved
+已儲存
 </div>
 
 
@@ -1333,7 +1334,7 @@ Saved
 
 /* =========================================
    HOME STOCK
-   DATA
+   資料
 ========================================= */
 
 const STORAGE_KEY = "homeStockUltimateData";
@@ -1357,7 +1358,7 @@ let calendarDate = new Date();
 
 
 /* =========================================
-   SAVE
+   儲存
 ========================================= */
 
 function saveData(){
@@ -1371,7 +1372,7 @@ JSON.stringify(data)
 
 
 /* =========================================
-   TOAST
+   提示
 ========================================= */
 
 function toast(message){
@@ -1391,7 +1392,7 @@ el.classList.remove("show");
 
 
 /* =========================================
-   PAGE
+   頁面
 ========================================= */
 
 function showPage(page){
@@ -1430,7 +1431,7 @@ behavior:"smooth"
 
 
 /* =========================================
-   MODAL
+   彈出視窗
 ========================================= */
 
 function openModal(html){
@@ -1467,7 +1468,7 @@ closeModal();
 
 
 /* =========================================
-   ADD ITEM
+   新增物品
 ========================================= */
 
 function openAddItem(){
@@ -1476,7 +1477,7 @@ openModal(`
 
 <div class="modal-header">
 
-<h2>➕ Add Home Item</h2>
+<h2>➕ 新增家居物品</h2>
 
 <button
 class="close"
@@ -1487,18 +1488,18 @@ onclick="closeModal()">
 </div>
 
 
-<label>Item Name</label>
+<label>物品名稱</label>
 
 <input
 id="formName"
-placeholder="e.g. Toilet Paper">
+placeholder="例如：廁紙">
 
 
-<label>Icon</label>
+<label>圖示</label>
 
 <input
 id="formIcon"
-placeholder="e.g. 🧻"
+placeholder="例如：🧻"
 value="📦">
 
 
@@ -1506,17 +1507,17 @@ value="📦">
 
 <div>
 
-<label>Category</label>
+<label>分類</label>
 
 <select id="formCategory">
 
-<option>Kitchen</option>
-<option>Bathroom</option>
-<option>Cleaning</option>
-<option>Pantry</option>
-<option>Personal Care</option>
-<option>Pet</option>
-<option>Other</option>
+<option value="Kitchen">廚房</option>
+<option value="Bathroom">浴室</option>
+<option value="Cleaning">清潔用品</option>
+<option value="Pantry">食品儲藏</option>
+<option value="Personal Care">個人護理</option>
+<option value="Pet">寵物用品</option>
+<option value="Other">其他</option>
 
 </select>
 
@@ -1525,19 +1526,19 @@ value="📦">
 
 <div>
 
-<label>Unit</label>
+<label>單位</label>
 
 <select id="formUnit">
 
-<option>pcs</option>
-<option>rolls</option>
-<option>cans</option>
-<option>bottles</option>
-<option>boxes</option>
-<option>bags</option>
-<option>packs</option>
-<option>kg</option>
-<option>L</option>
+<option value="pcs">件</option>
+<option value="rolls">卷</option>
+<option value="cans">罐</option>
+<option value="bottles">支／樽</option>
+<option value="boxes">盒</option>
+<option value="bags">袋</option>
+<option value="packs">包</option>
+<option value="kg">公斤</option>
+<option value="L">公升</option>
 
 </select>
 
@@ -1550,7 +1551,7 @@ value="📦">
 
 <div>
 
-<label>Current Quantity</label>
+<label>目前數量</label>
 
 <input
 id="formQuantity"
@@ -1563,7 +1564,7 @@ value="1">
 
 <div>
 
-<label>Minimum Quantity</label>
+<label>最低庫存數量</label>
 
 <input
 id="formMinimum"
@@ -1580,7 +1581,7 @@ value="1">
 
 <div>
 
-<label>Price Per Unit</label>
+<label>每件價格</label>
 
 <input
 id="formPrice"
@@ -1594,18 +1595,18 @@ placeholder="0.00">
 
 <div>
 
-<label>Preferred Store</label>
+<label>常用商店</label>
 
 <input
 id="formStore"
-placeholder="e.g. Costco">
+placeholder="例如：Costco">
 
 </div>
 
 </div>
 
 
-<label>Last Purchased</label>
+<label>上次購買日期</label>
 
 <input
 id="formLastBought"
@@ -1613,24 +1614,24 @@ type="date"
 value="${today()}">
 
 
-<label>Notes</label>
+<label>備註</label>
 
 <input
 id="formNotes"
-placeholder="Optional">
+placeholder="可選填">
 
 
 <button
 class="primary-button"
 onclick="saveNewItem()">
-Save Item
+儲存物品
 </button>
 
 
 <button
 class="cancel-button"
 onclick="closeModal()">
-Cancel
+取消
 </button>
 
 `);
@@ -1639,7 +1640,7 @@ Cancel
 
 
 /* =========================================
-   SAVE ITEM
+   儲存新物品
 ========================================= */
 
 function saveNewItem(){
@@ -1649,7 +1650,7 @@ document.getElementById("formName").value.trim();
 
 if(!name){
 
-alert("Please enter an item name.");
+alert("請輸入物品名稱。");
 
 return;
 
@@ -1701,7 +1702,7 @@ saveData();
 
 closeModal();
 
-toast("Item added ✓");
+toast("物品已加入 ✓");
 
 renderAll();
 
@@ -1709,7 +1710,7 @@ renderAll();
 
 
 /* =========================================
-   EDIT ITEM
+   修改物品
 ========================================= */
 
 function editItem(id){
@@ -1724,7 +1725,7 @@ openModal(`
 
 <div class="modal-header">
 
-<h2>✏️ Edit Item</h2>
+<h2>✏️ 修改物品</h2>
 
 <button
 class="close"
@@ -1735,14 +1736,14 @@ onclick="closeModal()">
 </div>
 
 
-<label>Item Name</label>
+<label>物品名稱</label>
 
 <input
 id="editName"
 value="${escapeHtml(item.name)}">
 
 
-<label>Icon</label>
+<label>圖示</label>
 
 <input
 id="editIcon"
@@ -1753,7 +1754,7 @@ value="${escapeHtml(item.icon)}">
 
 <div>
 
-<label>Category</label>
+<label>分類</label>
 
 <select id="editCategory">
 
@@ -1766,7 +1767,7 @@ ${categoryOptions(item.category)}
 
 <div>
 
-<label>Unit</label>
+<label>單位</label>
 
 <select id="editUnit">
 
@@ -1783,7 +1784,7 @@ ${unitOptions(item.unit)}
 
 <div>
 
-<label>Current Quantity</label>
+<label>目前數量</label>
 
 <input
 id="editQuantity"
@@ -1796,7 +1797,7 @@ value="${item.quantity}">
 
 <div>
 
-<label>Minimum Quantity</label>
+<label>最低庫存數量</label>
 
 <input
 id="editMinimum"
@@ -1813,7 +1814,7 @@ value="${item.minimum}">
 
 <div>
 
-<label>Price Per Unit</label>
+<label>每件價格</label>
 
 <input
 id="editPrice"
@@ -1827,7 +1828,7 @@ value="${item.price}">
 
 <div>
 
-<label>Preferred Store</label>
+<label>常用商店</label>
 
 <input
 id="editStore"
@@ -1838,7 +1839,7 @@ value="${escapeHtml(item.store || "")}">
 </div>
 
 
-<label>Last Purchased</label>
+<label>上次購買日期</label>
 
 <input
 id="editLastBought"
@@ -1846,7 +1847,7 @@ type="date"
 value="${item.lastBought || ""}">
 
 
-<label>Notes</label>
+<label>備註</label>
 
 <input
 id="editNotes"
@@ -1856,14 +1857,14 @@ value="${escapeHtml(item.notes || "")}">
 <button
 class="primary-button"
 onclick="saveEditItem('${item.id}')">
-Save Changes
+儲存修改
 </button>
 
 
 <button
 class="cancel-button"
 onclick="closeModal()">
-Cancel
+取消
 </button>
 
 `);
@@ -1872,7 +1873,7 @@ Cancel
 
 
 /* =========================================
-   SAVE EDIT
+   儲存修改
 ========================================= */
 
 function saveEditItem(id){
@@ -1888,7 +1889,7 @@ document.getElementById("editName").value.trim();
 
 if(!name){
 
-alert("Please enter an item name.");
+alert("請輸入物品名稱。");
 
 return;
 
@@ -1929,7 +1930,7 @@ saveData();
 
 closeModal();
 
-toast("Updated ✓");
+toast("已更新 ✓");
 
 renderAll();
 
@@ -1937,7 +1938,7 @@ renderAll();
 
 
 /* =========================================
-   DELETE
+   刪除物品
 ========================================= */
 
 function deleteItem(id){
@@ -1950,7 +1951,7 @@ if(!item) return;
 
 if(
 !confirm(
-`Delete "${item.name}"?`
+`確定要刪除「${item.name}」嗎？`
 )
 ){
 return;
@@ -1965,7 +1966,7 @@ i=>i.id!==id
 
 saveData();
 
-toast("Deleted");
+toast("已刪除");
 
 renderAll();
 
@@ -1973,7 +1974,7 @@ renderAll();
 
 
 /* =========================================
-   QUANTITY
+   數量
 ========================================= */
 
 function changeQuantity(id,amount){
@@ -1999,7 +2000,7 @@ renderAll();
 
 
 /* =========================================
-   STATUS
+   庫存狀態
 ========================================= */
 
 function getStatus(item){
@@ -2008,7 +2009,7 @@ if(item.quantity<=0){
 
 return {
 class:"out",
-text:"🔴 Out of Stock"
+text:"🔴 缺貨"
 };
 
 }
@@ -2017,21 +2018,21 @@ if(item.quantity<=item.minimum){
 
 return {
 class:"low",
-text:"⚠️ Need Restock"
+text:"⚠️ 需要補貨"
 };
 
 }
 
 return {
 class:"ok",
-text:"🟢 In Stock"
+text:"🟢 庫存充足"
 };
 
 }
 
 
 /* =========================================
-   INVENTORY
+   庫存
 ========================================= */
 
 function renderInventory(){
@@ -2108,8 +2109,8 @@ if(items.length===0){
 
 list.innerHTML=emptyState(
 "📦",
-"No items found",
-"Add your first home item to start tracking your stock."
+"搵唔到物品",
+"新增第一件家居物品，開始記錄你嘅庫存。"
 );
 
 return;
@@ -2124,7 +2125,7 @@ items.map(item=>itemHTML(item)).join("");
 
 
 /* =========================================
-   ITEM HTML
+   物品 HTML
 ========================================= */
 
 function itemHTML(item){
@@ -2151,7 +2152,7 @@ ${escapeHtml(item.name)}
 </div>
 
 <div class="item-category">
-${escapeHtml(item.category)}
+${categoryLabel(item.category)}
 </div>
 
 <div class="status ${status.class}">
@@ -2168,7 +2169,7 @@ ${item.quantity}
 </div>
 
 <div class="qty-unit">
-${escapeHtml(item.unit)}
+${unitLabel(item.unit)}
 </div>
 
 </div>
@@ -2179,11 +2180,11 @@ ${escapeHtml(item.unit)}
 <div class="item-info">
 
 <div class="info-chip">
-💰 $${money(item.price)} / ${escapeHtml(item.unit)}
+💰 $${money(item.price)} / ${unitLabel(item.unit)}
 </div>
 
 <div class="info-chip">
-🏪 ${escapeHtml(item.store || "No store")}
+🏪 ${escapeHtml(item.store || "未記錄商店")}
 </div>
 
 <div class="info-chip">
@@ -2210,7 +2211,7 @@ onclick="changeQuantity('${item.id}',1)">
 <button
 class="small-button"
 onclick="editItem('${item.id}')">
-✏️ Edit
+✏️ 修改
 </button>
 
 <button
@@ -2229,7 +2230,7 @@ onclick="deleteItem('${item.id}')">
 
 
 /* =========================================
-   CATEGORIES
+   分類
 ========================================= */
 
 function renderCategories(){
@@ -2259,7 +2260,7 @@ categories.map(category=>`
 class="category-btn ${selectedCategory===category?"active":""}"
 onclick="selectCategory('${category}')">
 
-${category}
+${categoryLabel(category)}
 
 </button>
 
@@ -2278,7 +2279,7 @@ renderInventory();
 
 
 /* =========================================
-   HOME
+   首頁
 ========================================= */
 
 function renderHome(){
@@ -2331,8 +2332,8 @@ if(lowItems.length===0){
 
 container.innerHTML=emptyState(
 "🎉",
-"Everything looks good!",
-"No items currently need restocking."
+"目前一切正常！",
+"暫時冇物品需要補貨。"
 );
 
 return;
@@ -2349,7 +2350,7 @@ lowItems
 
 
 /* =========================================
-   SHOPPING LIST
+   購物清單
 ========================================= */
 
 function renderShopping(){
@@ -2364,16 +2365,15 @@ i=>!i.done
 
 document.getElementById("shoppingCount")
 .textContent =
-active.length + " item" +
-(active.length===1?"":"s");
+active.length + " 項";
 
 
 if(active.length===0){
 
 list.innerHTML=emptyState(
 "🛒",
-"Shopping list is empty",
-"Items that need restocking can be added here."
+"購物清單暫時係空嘅",
+"需要補貨嘅物品可以加喺呢度。"
 );
 
 return;
@@ -2419,7 +2419,7 @@ onclick="deleteShopping('${item.id}')">
 
 
 /* =========================================
-   ADD SHOPPING
+   新增購物項目
 ========================================= */
 
 function openAddShopping(){
@@ -2428,7 +2428,7 @@ openModal(`
 
 <div class="modal-header">
 
-<h2>🛒 Add Shopping Item</h2>
+<h2>🛒 新增購物項目</h2>
 
 <button
 class="close"
@@ -2439,31 +2439,31 @@ onclick="closeModal()">
 </div>
 
 
-<label>Item</label>
+<label>物品</label>
 
 <input
 id="shoppingName"
-placeholder="e.g. Toilet Paper">
+placeholder="例如：廁紙">
 
 
-<label>Quantity / Note</label>
+<label>數量／備註</label>
 
 <input
 id="shoppingQuantity"
-placeholder="e.g. 2 packs">
+placeholder="例如：2包">
 
 
-<label>Preferred Store</label>
+<label>常用商店</label>
 
 <input
 id="shoppingStore"
-placeholder="e.g. Costco">
+placeholder="例如：Costco">
 
 
 <button
 class="primary-button"
 onclick="saveShopping()">
-Add to List
+加入清單
 </button>
 
 `);
@@ -2480,7 +2480,7 @@ document
 
 if(!name){
 
-alert("Please enter an item.");
+alert("請輸入物品名稱。");
 
 return;
 
@@ -2514,7 +2514,7 @@ saveData();
 
 closeModal();
 
-toast("Added to shopping list ✓");
+toast("已加入購物清單 ✓");
 
 renderAll();
 
@@ -2522,7 +2522,7 @@ renderAll();
 
 
 /* =========================================
-   COMPLETE SHOPPING
+   完成購物
 ========================================= */
 
 function completeShopping(id){
@@ -2549,7 +2549,7 @@ openModal(`
 
 <div class="modal-header">
 
-<h2>🛒 Bought!</h2>
+<h2>🛒 買咗！</h2>
 
 <button
 class="close"
@@ -2562,11 +2562,11 @@ onclick="closeModal()">
 <p style="color:var(--muted);margin-bottom:15px">
 
 ${escapeHtml(shopping.name)}
-is already in your inventory.
+已經存在於你嘅庫存。
 
 </p>
 
-<label>How many did you buy?</label>
+<label>買咗幾多？</label>
 
 <input
 id="boughtQuantity"
@@ -2575,7 +2575,7 @@ min="1"
 value="1">
 
 
-<label>Price per unit</label>
+<label>每件價格</label>
 
 <input
 id="boughtPrice"
@@ -2588,7 +2588,7 @@ value="${existing.price || 0}">
 <button
 class="primary-button"
 onclick="finishPurchase('${id}','${existing.id}')">
-Add to Inventory
+加入庫存
 </button>
 
 `);
@@ -2602,7 +2602,7 @@ openModal(`
 
 <div class="modal-header">
 
-<h2>🛒 Add New Item</h2>
+<h2>🛒 新增物品</h2>
 
 <button
 class="close"
@@ -2612,7 +2612,7 @@ onclick="closeModal()">
 
 </div>
 
-<label>How many did you buy?</label>
+<label>買咗幾多？</label>
 
 <input
 id="boughtQuantity"
@@ -2621,7 +2621,7 @@ min="1"
 value="1">
 
 
-<label>Price per unit</label>
+<label>每件價格</label>
 
 <input
 id="boughtPrice"
@@ -2631,17 +2631,17 @@ step="0.01"
 value="0">
 
 
-<label>Category</label>
+<label>分類</label>
 
 <select id="boughtCategory">
 
-<option>Kitchen</option>
-<option>Bathroom</option>
-<option>Cleaning</option>
-<option>Pantry</option>
-<option>Personal Care</option>
-<option>Pet</option>
-<option>Other</option>
+<option value="Kitchen">廚房</option>
+<option value="Bathroom">浴室</option>
+<option value="Cleaning">清潔用品</option>
+<option value="Pantry">食品儲藏</option>
+<option value="Personal Care">個人護理</option>
+<option value="Pet">寵物用品</option>
+<option value="Other">其他</option>
 
 </select>
 
@@ -2649,7 +2649,7 @@ value="0">
 <button
 class="primary-button"
 onclick="finishNewPurchase('${id}')">
-Add to Inventory
+加入庫存
 </button>
 
 `);
@@ -2658,7 +2658,7 @@ Add to Inventory
 
 
 /* =========================================
-   FINISH EXISTING PURCHASE
+   完成現有物品購買
 ========================================= */
 
 function finishPurchase(shoppingId,itemId){
@@ -2723,7 +2723,7 @@ saveData();
 
 closeModal();
 
-toast("Inventory updated ✓");
+toast("庫存已更新 ✓");
 
 renderAll();
 
@@ -2731,7 +2731,7 @@ renderAll();
 
 
 /* =========================================
-   FINISH NEW PURCHASE
+   完成新物品購買
 ========================================= */
 
 function finishNewPurchase(shoppingId){
@@ -2819,7 +2819,7 @@ saveData();
 
 closeModal();
 
-toast("New item added ✓");
+toast("新物品已加入 ✓");
 
 renderAll();
 
@@ -2827,7 +2827,7 @@ renderAll();
 
 
 /* =========================================
-   DELETE SHOPPING
+   刪除購物項目
 ========================================= */
 
 function deleteShopping(id){
@@ -2845,7 +2845,7 @@ renderAll();
 
 
 /* =========================================
-   CALENDAR
+   日曆
 ========================================= */
 
 function changeCalendarMonth(direction){
@@ -2875,16 +2875,16 @@ calendarDate.getMonth();
 
 
 const monthNames=[
-"January","February","March",
-"April","May","June",
-"July","August","September",
-"October","November","December"
+"一月","二月","三月",
+"四月","五月","六月",
+"七月","八月","九月",
+"十月","十一月","十二月"
 ];
 
 
 document.getElementById("calendarTitle")
 .textContent =
-monthNames[month]+" "+year;
+year+"年"+monthNames[month];
 
 
 const first =
@@ -2928,17 +2928,20 @@ date===today();
 
 let icons="";
 
+
 if(purchases.length){
 
 const unique =
 [...new Set(
 purchases.map(p=>{
+
 const item =
 data.items.find(
 i=>i.id===p.itemId
 );
 
 return item ? item.icon : "📦";
+
 })
 )];
 
@@ -2988,7 +2991,7 @@ renderTimeline();
 
 
 /* =========================================
-   CALENDAR DAY
+   日曆日期
 ========================================= */
 
 function openCalendarDay(date){
@@ -3020,8 +3023,8 @@ if(purchases.length===0){
 
 html+=emptyState(
 "📭",
-"No purchases",
-"Nothing was recorded on this date."
+"冇購買記錄",
+"呢日冇任何購買記錄。"
 );
 
 }else{
@@ -3060,7 +3063,7 @@ openModal(html);
 
 
 /* =========================================
-   TIMELINE
+   時間線
 ========================================= */
 
 function renderTimeline(){
@@ -3083,8 +3086,8 @@ if(sorted.length===0){
 
 container.innerHTML=emptyState(
 "📅",
-"No purchase history",
-"Your purchase history will appear here."
+"暫時冇購買記錄",
+"你嘅購買記錄會喺呢度顯示。"
 );
 
 return;
@@ -3146,7 +3149,7 @@ ${p.store ? " • "+escapeHtml(p.store):""}
 
 
 /* =========================================
-   STATS
+   統計
 ========================================= */
 
 function renderStats(){
@@ -3211,7 +3214,7 @@ renderMonthlyStats();
 
 
 /* =========================================
-   MONTHLY STATS
+   每月統計
 ========================================= */
 
 function renderMonthlyStats(){
@@ -3230,9 +3233,11 @@ data.purchases.forEach(p=>{
 const month =
 p.date.substring(0,7);
 
+
 if(!months[month]){
 months[month]=0;
 }
+
 
 months[month]+=
 p.quantity*p.price;
@@ -3251,8 +3256,8 @@ if(keys.length===0){
 
 container.innerHTML=emptyState(
 "💰",
-"No purchase data",
-"Your monthly spending will appear here."
+"暫時冇購買資料",
+"每月購買支出會喺呢度顯示。"
 );
 
 return;
@@ -3281,7 +3286,7 @@ $${money(months[month])}
 
 
 /* =========================================
-   SETTINGS
+   設定
 ========================================= */
 
 function openSettings(){
@@ -3290,7 +3295,7 @@ openModal(`
 
 <div class="modal-header">
 
-<h2>⚙️ Settings</h2>
+<h2>⚙️ 設定</h2>
 
 <button
 class="close"
@@ -3305,7 +3310,7 @@ onclick="closeModal()">
 style="box-shadow:none;padding:0">
 
 <h3 style="margin-bottom:8px">
-💾 Backup
+💾 備份
 </h3>
 
 <p
@@ -3313,18 +3318,16 @@ style="
 color:var(--muted);
 font-size:13px;
 line-height:1.5;
-margin-bottom:12px;
-">
+margin-bottom:12px;">
 
-Download a backup of your inventory,
-shopping list and purchase history.
+下載你嘅庫存、購物清單及購買記錄備份。
 
 </p>
 
 <button
 class="primary-button"
 onclick="exportBackup()">
-📤 Export Backup
+📤 匯出備份
 </button>
 
 <label
@@ -3332,10 +3335,9 @@ class="primary-button"
 style="
 display:block;
 text-align:center;
-cursor:pointer;
-">
+cursor:pointer;">
 
-📥 Import Backup
+📥 匯入備份
 
 <input
 type="file"
@@ -3352,13 +3354,13 @@ onchange="importBackup(event)">
 style="box-shadow:none;padding:0;margin-top:15px">
 
 <h3 style="margin-bottom:8px">
-🗑 Data
+🗑 資料
 </h3>
 
 <button
 class="small-button danger"
 onclick="clearAllData()">
-Delete All Data
+刪除所有資料
 </button>
 
 </div>
@@ -3369,7 +3371,7 @@ Delete All Data
 
 
 /* =========================================
-   DARK MODE
+   深色模式
 ========================================= */
 
 function toggleDarkMode(){
@@ -3398,7 +3400,7 @@ applyTheme();
 
 
 /* =========================================
-   BACKUP EXPORT
+   匯出備份
 ========================================= */
 
 function exportBackup(){
@@ -3438,13 +3440,13 @@ a.click();
 
 URL.revokeObjectURL(url);
 
-toast("Backup downloaded ✓");
+toast("備份已下載 ✓");
 
 }
 
 
 /* =========================================
-   BACKUP IMPORT
+   匯入備份
 ========================================= */
 
 function importBackup(event){
@@ -3480,7 +3482,7 @@ throw new Error();
 
 if(
 !confirm(
-"Import this backup? Your current data will be replaced."
+"確定要匯入呢份備份嗎？目前資料會被取代。"
 )
 ){
 
@@ -3499,12 +3501,12 @@ applyTheme();
 
 renderAll();
 
-toast("Backup restored ✓");
+toast("備份已還原 ✓");
 
 }catch(e){
 
 alert(
-"This backup file is not valid."
+"呢份備份檔案無效。"
 );
 
 }
@@ -3518,14 +3520,14 @@ reader.readAsText(file);
 
 
 /* =========================================
-   CLEAR
+   清除所有資料
 ========================================= */
 
 function clearAllData(){
 
 if(
 !confirm(
-"Delete ALL Home Stock data? This cannot be undone."
+"確定要刪除所有家居庫存資料嗎？此操作無法復原。"
 )
 ){
 
@@ -3550,13 +3552,13 @@ closeModal();
 
 renderAll();
 
-toast("All data deleted");
+toast("所有資料已刪除");
 
 }
 
 
 /* =========================================
-   HELPERS
+   輔助函數
 ========================================= */
 
 function today(){
@@ -3588,7 +3590,7 @@ return `${y}-${m}-${d}`;
 
 function formatDate(date){
 
-if(!date) return "Not recorded";
+if(!date) return "未有記錄";
 
 
 const parts =
@@ -3599,9 +3601,9 @@ return date;
 
 
 return (
-parts[2]+"/"+
-parts[1]+"/"+
-parts[0]
+parts[0]+"年"+
+Number(parts[1])+"月"+
+Number(parts[2])+"日"
 );
 
 }
@@ -3612,21 +3614,20 @@ function formatMonth(month){
 const parts =
 month.split("-");
 
-const date =
-new Date(
-Number(parts[0]),
-Number(parts[1])-1,
-1
-);
+const year =
+Number(parts[0]);
 
+const monthNumber =
+Number(parts[1]);
 
-return date.toLocaleDateString(
-"en-CA",
-{
-month:"long",
-year:"numeric"
-}
-);
+const monthNames=[
+"一月","二月","三月",
+"四月","五月","六月",
+"七月","八月","九月",
+"十月","十一月","十二月"
+];
+
+return year+"年"+monthNames[monthNumber-1];
 
 }
 
@@ -3676,46 +3677,157 @@ return String(value ?? "")
 }
 
 
+/* =========================================
+   分類中文名稱
+========================================= */
+
+function categoryLabel(category){
+
+const labels={
+
+All:"全部",
+
+Kitchen:"廚房",
+
+Bathroom:"浴室",
+
+Cleaning:"清潔用品",
+
+Pantry:"食品儲藏",
+
+"Personal Care":"個人護理",
+
+Pet:"寵物用品",
+
+Other:"其他"
+
+};
+
+return labels[category] || category;
+
+}
+
+
+/* =========================================
+   單位中文名稱
+========================================= */
+
+function unitLabel(unit){
+
+const labels={
+
+pcs:"件",
+
+rolls:"卷",
+
+cans:"罐",
+
+bottles:"支／樽",
+
+boxes:"盒",
+
+bags:"袋",
+
+packs:"包",
+
+kg:"公斤",
+
+L:"公升"
+
+};
+
+return labels[unit] || unit;
+
+}
+
+
+/* =========================================
+   分類選項
+========================================= */
+
 function categoryOptions(selected){
 
 const list=[
-"Kitchen",
-"Bathroom",
-"Cleaning",
-"Pantry",
-"Personal Care",
-"Pet",
-"Other"
+
+["Kitchen","廚房"],
+
+["Bathroom","浴室"],
+
+["Cleaning","清潔用品"],
+
+["Pantry","食品儲藏"],
+
+["Personal Care","個人護理"],
+
+["Pet","寵物用品"],
+
+["Other","其他"]
+
 ];
 
 
 return list.map(x=>
-`<option ${x===selected?"selected":""}>${x}</option>`
+`<option value="${x[0]}" ${x[0]===selected?"selected":""}>${x[1]}</option>`
 ).join("");
 
 }
 
+
+/* =========================================
+   單位選項
+========================================= */
 
 function unitOptions(selected){
 
 const list=[
-"pcs",
-"rolls",
-"cans",
-"bottles",
-"boxes",
-"bags",
-"packs",
-"kg",
-"L"
+
+["pcs","件"],
+
+["rolls","卷"],
+
+["cans","罐"],
+
+["bottles","支／樽"],
+
+["boxes","盒"],
+
+["bags","袋"],
+
+["packs","包"],
+
+["kg","公斤"],
+
+["L","公升"]
+
 ];
 
 
 return list.map(x=>
-`<option ${x===selected?"selected":""}>${x}</option>`
+`<option value="${x[0]}" ${x[0]===selected?"selected":""}>${x[1]}</option>`
 ).join("");
 
 }
+
+
+/* =========================================
+   修正搜尋功能
+========================================= */
+
+document.addEventListener("DOMContentLoaded",function(){
+
+const search =
+document.getElementById("searchInput");
+
+if(search){
+
+search.addEventListener(
+"input",
+renderInventory
+);
+
+}
+
+});
 
 
 /* =========================================
@@ -3738,7 +3850,7 @@ renderStats();
 
 
 /* =========================================
-   START
+   開始
 ========================================= */
 
 renderAll();
